@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AD Management Portal</title>
+    <!--  -->
+    <style>
+        /* A minified version of Bootstrap 5.3.2 is included for offline use */
+        :root, [data-bs-theme=light]{--bs-blue:#0d6efd;--bs-indigo:#6610f2;--bs-purple:#6f42c1;--bs-pink:#d63384;--bs-red:#dc3545;--bs-orange:#fd7e14;--bs-yellow:#ffc107;--bs-green:#198754;--bs-teal:#20c997;--bs-cyan:#0dcaf0;--bs-black:#000;--bs-white:#fff;--bs-gray:#6c757d;--bs-gray-dark:#343a40;--bs-gray-100:#f8f9fa;--bs-gray-200:#e9ecef;--bs-gray-300:#dee2e6;--bs-gray-400:#ced4da;--bs-gray-500:#adb5bd;--bs-gray-600:#6c757d;--bs-gray-700:#495057;--bs-gray-800:#343a40;--bs-gray-900:#212529;--bs-primary:#0d6efd;--bs-secondary:#6c757d;--bs-success:#198754;--bs-info:#0dcaf0;--bs-warning:#ffc107;--bs-danger:#dc3545;--bs-light:#f8f9fa;--bs-dark:#212529;--bs-primary-rgb:13,110,253;--bs-secondary-rgb:108,117,125;--bs-success-rgb:25,135,84;--bs-info-rgb:13,202,240;--bs-warning-rgb:255,193,7;--bs-danger-rgb:220,53,69;--bs-light-rgb:248,249,250;--bs-dark-rgb:33,37,41;--bs-white-rgb:255,255,255;--bs-black-rgb:0,0,0;--bs-body-font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";--bs-body-font-size:1rem;--bs-body-font-weight:400;--bs-body-line-height:1.5;--bs-body-color:#212529;--bs-body-bg:#fff;--bs-border-width:1px;--bs-border-style:solid;--bs-border-color:#dee2e6;--bs-border-radius:.375rem;--bs-link-color:#0d6efd;--bs-link-hover-color:#0a58ca;}
+        body{margin:0;font-family:var(--bs-body-font-family);font-size:var(--bs-body-font-size);font-weight:var(--bs-body-font-weight);line-height:var(--bs-body-line-height);color:var(--bs-body-color);background-color:var(--bs-body-bg);}
+        .container{width:100%;padding-right:var(--bs-gutter-x,.75rem);padding-left:var(--bs-gutter-x,.75rem);margin-right:auto;margin-left:auto}@media (min-width:576px){.container{max-width:540px}}@media (min-width:768px){.container{max-width:720px}}@media (min-width:992px){.container{max-width:960px}}@media (min-width:1200px){.container{max-width:1140px}}
+
+        /* Custom Styles */
+        .screen{display:none;align-items:center;justify-content:center;min-height:100vh;}
+        #login-page{display:flex;}
+        .login-box{width:100%;max-width:400px;padding:2.5rem;border:1px solid var(--bs-border-color);border-radius:.5rem;background-color:var(--bs-body-bg);}
+        
+        /* Saudi Electricity Company Inspired Blue Theme */
+        :root, [data-bs-theme=light]{--bs-primary:#005A9E;--bs-primary-rgb:0,90,158;--bs-link-color:#005A9E;--bs-link-hover-color:#00487d;--bs-body-bg:#f8f9fa;}
+        .btn-primary{--bs-btn-color:#fff;--bs-btn-bg:#005A9E;--bs-btn-border-color:#005A9E;--bs-btn-hover-color:#fff;--bs-btn-hover-bg:#004f8a;--bs-btn-hover-border-color:#004a81;}
+        .navbar-dark{background-color:var(--bs-primary)!important;}
+    </style>
+</head>
+<body>
+    <!-- Main Application Containers -->
+    <div id="loading-spinner" class="d-flex justify-content-center align-items-center vh-100 position-fixed top-0 start-0 w-100 h-100" style="background-color: rgba(0,0,0,0.5); z-index: 2000; display: none;"><div class="spinner-border text-light" role="status"><span class="visually-hidden">Loading...</span></div></div>
+    <div id="login-page" class="screen"><div class="login-box text-center"><h1 class="h3 mb-3 fw-normal">AD Management Portal</h1><p class="mb-4">Use your Windows credentials to log in.</p><button class="w-100 btn btn-lg btn-primary" id="login-btn">Login</button><p class="mt-4 text-body-secondary">&copy; 2025</p></div></div>
+    <div id="error-screen" class="screen"><div class="text-center"><h1 class="text-danger">Access Denied</h1><p class="lead">You are not authorized to access this portal.</p><p id="error-details" class="text-danger"></p><button class="btn btn-secondary mt-3" id="try-again-btn">Try Again</button></div></div>
+
+    <!-- Main Application UI (hidden by default) -->
+    <div id="main-app" style="display: none;">
+        <nav class="navbar navbar-expand-lg navbar-dark"><div class="container-fluid"><a class="navbar-brand" href="#">AD Portal</a><span class="navbar-text me-auto">| Welcome, <strong id="user-name"></strong></span><button id="logout-btn" class="btn btn-outline-light">Logout</button></div></nav>
+        <main class="container mt-4">
+            <div id="alert-placeholder"></div>
+            <div class="card"><div class="card-header"><h4>User Management</h4></div><div class="card-body"><p>User management interface goes here.</p></div></div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Configuration
+            const API_BASE_URL = 'https://localhost:5001/api'; // Must match the API's URL
+            let currentUser = null;
+            let config = null;
+
+            // UI Element References
+            const screens = {
+                login: document.getElementById('login-page'),
+                error: document.getElementById('error-screen'),
+                main: document.getElementById('main-app'),
+                loading: document.getElementById('loading-spinner')
+            };
+            const loginBtn = document.getElementById('login-btn');
+            const logoutBtn = document.getElementById('logout-btn');
+            const tryAgainBtn = document.getElementById('try-again-btn');
+
+            // --- Core Functions ---
+            const showScreen = (screenName) => {
+                Object.values(screens).forEach(s => s.style.display = 'none');
+                screens.loading.style.display = 'none'; // Ensure loading is hidden
+                if (screens[screenName]) {
+                    screens[screenName].style.display = screenName === 'main' ? 'block' : 'flex';
+                }
+            };
+
+            const showLoading = (isLoading) => {
+                screens.loading.style.display = isLoading ? 'flex' : 'none';
+                loginBtn.disabled = isLoading;
+            };
+
+            const apiFetch = async (endpoint, options = {}) => {
+                showLoading(true);
+                try {
+                    // 'credentials: "include"' is vital for sending Windows Auth details cross-origin
+                    const response = await fetch(`${API_BASE_URL}${endpoint}`, { 
+                        ...options, 
+                        credentials: 'include', 
+                        headers: { 'Content-Type': 'application/json', ...options.headers } 
+                    });
+                    
+                    if (!response.ok) {
+                        const errorData = await response.json().catch(() => ({ message: "An unknown server error occurred." }));
+                        throw new Error(errorData.detail || errorData.message || `HTTP Error: ${response.status}`);
+                    }
+                    
+                    return response.status === 204 ? null : response.json();
+                } finally {
+                    showLoading(false);
+                }
+            };
+
+            // --- Application Logic ---
+            const initializeApp = async () => {
+                try {
+                    currentUser = await apiFetch('/auth/me');
+                    config = await apiFetch('/config/settings');
+                    
+                    document.getElementById('user-name').textContent = currentUser.name;
+                    showScreen('main');
+                } catch (error) {
+                    console.error('Initialization failed:', error);
+                    document.getElementById('error-details').textContent = error.message;
+                    showScreen('error');
+                }
+            };
+
+            const logout = () => {
+                currentUser = config = null;
+                showScreen('login');
+            };
+
+            // --- Event Listeners ---
+            loginBtn.addEventListener('click', initializeApp);
+            logoutBtn.addEventListener('click', logout);
+            tryAgainBtn.addEventListener('click', () => showScreen('login'));
+
+            // Set initial state
+            showScreen('login');
+        });
+    </script>
+</body>
+</html>
+
