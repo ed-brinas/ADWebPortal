@@ -1,9 +1,9 @@
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-// This simple configuration serves the index.html file as the default document
-// and enables serving other static assets from the wwwroot folder.
-app.UseDefaultFiles();
-app.UseStaticFiles();
+// Configure the HTTP request pipeline.
+app.UseDefaultFiles(); // This will serve index.html by default
+app.UseStaticFiles(); // This enables serving files from wwwroot
 
 app.Run();
+
