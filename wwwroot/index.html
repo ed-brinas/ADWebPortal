@@ -86,7 +86,6 @@
         </footer>
     </div>
 
-    <!-- (Modals are unchanged) -->
     <!-- Create User Modal -->
     <div class="modal fade" id="create-user-modal" tabindex="-1" aria-labelledby="createUserModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content">
         <div class="modal-header"><h5 class="modal-title" id="createUserModalLabel">Create New User</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
@@ -94,32 +93,31 @@
             <div class="mb-3"><label for="create-domain" class="form-label">Target Domain</label><select class="form-select" id="create-domain" required></select></div>
             <div class="row"><div class="col-md-6 mb-3"><label for="create-firstname" class="form-label">First Name</label><input type="text" class="form-control" id="create-firstname" required></div><div class="col-md-6 mb-3"><label for="create-lastname" class="form-label">Last Name</label><input type="text" class="form-control" id="create-lastname" required></div></div>
             <div class="mb-3"><label for="create-samaccountname" class="form-label">Name (Logon Name)</label><input type="text" class="form-control" id="create-samaccountname" required></div>
-            <div class="mb-3"><label for="create-expiration" class="form-label">Account Expiration Date (Optional)</label><input type="date" class="form-control" id="create-expiration"></div>
+            <div class="mb-3"><label for="create-expiration" class="form-label">Account Expiration Date</label><input type="date" class="form-control" id="create-expiration" required></div>
             <div id="create-optional-groups-container" class="mb-3" style="display: none;"><label class="form-label">Optional Groups</label><div id="create-optional-groups-list"></div></div>
             <div id="create-admin-container" class="form-check form-switch mb-3" style="display: none;"><input class="form-check-input" type="checkbox" role="switch" id="create-admin-account"><label class="form-check-label" for="create-admin-account">Create associated admin account</label></div>
             <div class="alert alert-info small">A secure, random password will be generated for the new user account(s).</div>
         </form></div>
         <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button><button type="submit" form="create-user-form" class="btn btn-primary">Create User</button></div>
     </div></div></div>
-    <!-- Create User Result Modal -->
+    
+    <!-- (Other modals are unchanged) -->
     <div class="modal fade" id="create-user-result-modal" tabindex="-1" aria-labelledby="createUserResultModalLabel" aria-hidden="true"><div class="modal-dialog modal-lg"><div class="modal-content">
         <div class="modal-header"><h5 class="modal-title" id="createUserResultModalLabel">User Creation Successful</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
         <div class="modal-body" id="create-user-result-body"></div>
         <div class="modal-footer"><button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button></div>
     </div></div></div>
-    <!-- Edit User Modal -->
     <div class="modal fade" id="edit-user-modal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content">
         <div class="modal-header"><h5 class="modal-title" id="editUserModalLabel">Edit User</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
         <div class="modal-body"><form id="edit-user-form" novalidate>
             <input type="hidden" id="edit-samaccountname"><input type="hidden" id="edit-domain">
             <div class="mb-3"><label for="edit-displayname" class="form-label">Display Name</label><input type="text" class="form-control" id="edit-displayname" disabled></div>
-            <div class="mb-3"><label for="edit-expiration" class="form-label">Account Expiration Date (Optional)</label><input type="date" class="form-control" id="edit-expiration"></div>
+            <div class="mb-3"><label for="edit-expiration" class="form-label">Account Expiration Date</label><input type="date" class="form-control" id="edit-expiration" required></div>
             <div id="edit-optional-groups-container" class="mb-3" style="display: none;"><label class="form-label">Optional Groups</label><div id="edit-optional-groups-list"></div></div>
             <div id="edit-admin-container" class="form-check form-switch mb-3" style="display: none;"><input class="form-check-input" type="checkbox" role="switch" id="edit-admin-account"><label class="form-check-label" for="edit-admin-account">Manage associated admin account</label></div>
         </form></div>
         <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button><button type="submit" form="edit-user-form" class="btn btn-primary">Save Changes</button></div>
     </div></div></div>
-    <!-- Password Reset Result Modal -->
     <div class="modal fade" id="reset-password-result-modal" tabindex="-1" aria-labelledby="resetPasswordResultModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content">
         <div class="modal-header"><h5 class="modal-title" id="resetPasswordResultModalLabel">Password Reset Successful</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
         <div class="modal-body">
@@ -140,7 +138,6 @@
         !function(t,e){"object"==typeof exports&&"undefined"!=typeof module?module.exports=e():"function"==typeof define&&define.amd?define(e):(t="undefined"!=typeof globalThis?globalThis:t||self).bootstrap=e()}(this,(function(){"use strict";const t=new Map,e={set(e,s,i){t.has(e)||t.set(e,new Map);const n=t.get(e);n.has(s)||0===n.size?n.set(s,i):console.error(`Bootstrap doesn't allow more than one instance per element. Bound instance: ${Array.from(n.keys())[0]}.`)},get:(t,e)=>t&&t.has(e)?t.get(e):null,remove(e,s){if(!t.has(e))return;const i=t.get(e);i.delete(s),0===i.size&&t.delete(e)}};const s="transitionend",i=t=>(t&&window.getComputedStyle(t).transitionDuration,t);const n=t=>{if(!t)return 0;let{transitionDuration:e,transitionDelay:s}=window.getComputedStyle(t);const i=Number.parseFloat(e),n=Number.parseFloat(s);return i||n?(e=e.split(",")[0],s=s.split(",")[0],1e3*(Number.parseFloat(e)+Number.parseFloat(s))):0},o=t=>{t.dispatchEvent(new Event(s))},r=t=>!(!t||"object"!=typeof t)&&(void 0!==t.jquery&&(t=t[0]),void 0!==t.nodeType),a=t=>r(t)?t.jquery?t[0]:t:"string"==typeof t&&t.length>0?document.querySelector(t):null;const l=t=>{if(!r(t)||0===t.getClientRects().length)return!1;const e="visible"===getComputedStyle(t).getPropertyValue("visibility"),s=t.closest("details:not([open])");if(!s)return e;if(s!==t){const e=t.closest("summary");if(e&&e.parentNode!==s)return!1;if(null===e)return!1}return e},c=t=>!t||t.nodeType!==Node.ELEMENT_NODE||!!t.classList.contains("disabled")||(void 0!==t.disabled?t.disabled:t.hasAttribute("disabled")&&"false"!==t.getAttribute("disabled"));const h={};let d=1;const u={set(t,e,s){void 0===t.bsKey&&(t.bsKey=d++,h[t.bsKey]={}),h[t.bsKey][e]=s},get:(t,e)=>h[t.bsKey]?h[t.bsKey][e]:void 0,delete(t,e){if(void 0===t.bsKey)return;const s=h[t.bsKey];delete s[e],0===Object.keys(s).length&&(delete h[t.bsKey],delete t.bsKey)}};const p=()=>"rtl"===document.documentElement.dir;class f{constructor(t,s,i){t&&e.set(t,s,i)}static getOrCreateInstance(t,e={}){return this.getInstance(t)||new this(t,e)}static getInstance(t){const{instance:s}=e.get(t)||{};return s}static get NAME(){throw new Error('You have to implement the static method "NAME"!')}static get DATA_KEY(){return`bs.${this.NAME}`}static get EVENT_KEY(){return`.${this.DATA_KEY}`}dispose(){e.remove(this._element,this.constructor.DATA_KEY),this._element=null}static jQueryInterface(t){return function(e){const s="string"==typeof e?t[e].call(this):t.constructor.call(this,e);return void 0===s?this:s}}}class m extends f{static get NAME(){return"modal"}constructor(t,s){super(t,s);this._dialog=a(".modal-dialog",this._element),this._backdrop=this._initializeBackDrop(),this._isShown=!1,this._ignoreBackdropClick=!1,this._isTransitioning=!1,this._didInit=!1}toggle(t){return this._isShown?this.hide():this.show(t)}show(t){if(this._isShown||this._isTransitioning)return;this._isShown=!0,this._isTransitioning=!0;this._showBackdrop().then(()=>this._showElement(t))}hide(){if(!this._isShown||this._isTransitioning)return;this._isShown=!1,this._isTransitioning=!0;this._hideElement().then(()=>this._hideBackdrop())}update(){this._adjustDialog()}_initializeBackDrop(){return document.createElement("div")}_showElement(t){const e=this._element;e.style.display="block",e.removeAttribute("aria-hidden"),e.setAttribute("aria-modal",!0),e.setAttribute("role","dialog"),e.scrollTop=0;const s=a(".modal-body",this._dialog);s&&(s.scrollTop=0),this._adjustDialog();const i=()=>{this._isTransitioning=!1,this._element.focus()};this._element.classList.add("show"),this._queueCallback(i,e,!0)}_hideElement(){const t=this._element;t.style.display="none",t.setAttribute("aria-hidden",!0),t.removeAttribute("aria-modal"),t.removeAttribute("role");const e=()=>{this._isTransitioning=!1};return this._element.classList.remove("show"),this._queueCallback(e,t,!0),Promise.resolve()}_showBackdrop(){return new Promise(t=>{this._backdrop.className="modal-backdrop fade",document.body.appendChild(this._backdrop);const e=()=>{this._backdrop.classList.add("show"),t()};this._queueCallback(e,this._backdrop,!0)})}_hideBackdrop(){return this._backdrop.classList.remove("show"),new Promise(t=>{const e=()=>{this._backdrop.remove(),t()};this._queueCallback(e,this._backdrop,!0)})}_adjustDialog(){const t=this._element.scrollHeight>document.documentElement.clientHeight;(!this._isBodyOverflowing&&t&&!p()||this._isBodyOverflowing&&!t&&!p())&&(this._element.style.paddingLeft=this._scrollbarWidth+"px"),(!this._isBodyOverflowing&&t&&p()||this._isBodyOverflowing&&!t&&p())&&(this._element.style.paddingRight=this._scrollbarWidth+"px")}}class g extends f{static get NAME(){return"alert"}close(){if(this._element.classList.contains("show")){const t=this._element.closest(".alert");t&&t.classList.remove("show")}}}return g.jQueryInterface(g),g}));
     </script>
     <script>
-        // Application JavaScript (unchanged)
         document.addEventListener('DOMContentLoaded', () => {
             // --- Configuration and State ---
             const API_BASE_URL = 'http://localhost:5000/api';
@@ -182,10 +179,11 @@
                 alertPlaceholder.append(wrapper);
             };
 
+            const toISODateString = (date) => date.toISOString().split('T')[0];
+
             const formatDateForInput = (dateString) => {
                 if (!dateString) return '';
-                const date = new Date(dateString);
-                return date.toISOString().split('T')[0];
+                return toISODateString(new Date(dateString));
             };
 
             const formatDisplayDate = (dateString) => {
@@ -300,6 +298,16 @@
             
             const handleShowCreateModal = () => {
                 document.getElementById('create-user-form').reset();
+                
+                const expirationInput = document.getElementById('create-expiration');
+                const today = new Date();
+                const oneYearFromNow = new Date();
+                oneYearFromNow.setFullYear(today.getFullYear() + 1);
+                
+                expirationInput.min = toISODateString(today);
+                expirationInput.max = toISODateString(oneYearFromNow);
+                expirationInput.value = toISODateString(oneYearFromNow); // Default to one year
+
                 const groupsContainer = document.getElementById('create-optional-groups-container');
                 const adminContainer = document.getElementById('create-admin-container');
                 if (currentUser.isHighPrivilege) {
@@ -324,7 +332,15 @@
                     document.getElementById('edit-displayname').value = userDetails.displayName;
                     document.getElementById('edit-samaccountname').value = userDetails.samAccountName;
                     document.getElementById('edit-domain').value = domain;
-                    document.getElementById('edit-expiration').value = formatDateForInput(userDetails.accountExpirationDate);
+                    
+                    const expirationInput = document.getElementById('edit-expiration');
+                    const today = new Date();
+                    const oneYearFromNow = new Date();
+                    oneYearFromNow.setFullYear(today.getFullYear() + 1);
+                    expirationInput.min = toISODateString(today);
+                    expirationInput.max = toISODateString(oneYearFromNow);
+                    expirationInput.value = formatDateForInput(userDetails.accountExpirationDate) || toISODateString(oneYearFromNow);
+
 
                     const groupsContainer = document.getElementById('edit-optional-groups-container');
                     const adminContainer = document.getElementById('edit-admin-container');
@@ -385,7 +401,11 @@
             const handleCreateSubmit = async (e) => {
                 e.preventDefault();
                 const form = e.target;
-                if (!form.checkValidity()) { e.stopPropagation(); return; }
+                if (!form.checkValidity()) { 
+                    form.classList.add('was-validated');
+                    e.stopPropagation(); 
+                    return; 
+                }
                 
                 const expirationDate = form.querySelector('#create-expiration').value;
                 const optionalGroups = Array.from(form.querySelectorAll('#create-optional-groups-list input:checked')).map(cb => cb.value);
@@ -396,7 +416,7 @@
                     samAccountName: form.querySelector('#create-samaccountname').value,
                     optionalGroups: optionalGroups,
                     createAdminAccount: form.querySelector('#create-admin-account').checked,
-                    accountExpirationDate: expirationDate ? expirationDate : null
+                    accountExpirationDate: expirationDate
                 };
 
                 try {
@@ -426,6 +446,11 @@
             const handleEditSubmit = async (e) => {
                 e.preventDefault();
                 const form = e.target;
+                 if (!form.checkValidity()) { 
+                    form.classList.add('was-validated');
+                    e.stopPropagation(); 
+                    return; 
+                }
                 const expirationDate = form.querySelector('#edit-expiration').value;
                 const optionalGroups = Array.from(form.querySelectorAll('#edit-optional-groups-list input:checked')).map(cb => cb.value);
                 const data = {
@@ -433,7 +458,7 @@
                     samAccountName: form.querySelector('#edit-samaccountname').value,
                     optionalGroups: optionalGroups,
                     manageAdminAccount: form.querySelector('#edit-admin-account').checked,
-                    accountExpirationDate: expirationDate ? expirationDate : null
+                    accountExpirationDate: expirationDate
                 };
 
                 try {
