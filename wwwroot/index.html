@@ -6,7 +6,19 @@
     <title>Active Directory Management Portal</title>
     <style>
         /* Embedded Bootstrap v5.3 for offline use */
-        :root,[data-bs-theme=light]{--bs-blue:#0d6efd;--bs-indigo:#6610f2;--bs-purple:#6f42c1;--bs-pink:#d63384;--bs-red:#dc3545;--bs-orange:#fd7e14;--bs-yellow:#ffc107;--bs-green:#198754;--bs-teal:#20c997;--bs-cyan:#0dcaf0;--bs-black:#000;--bs-white:#fff;--bs-gray:#6c757d;--bs-gray-dark:#343a40;--bs-gray-100:#f8f9fa;--bs-gray-200:#e9ecef;--bs-gray-300:#dee2e6;--bs-gray-400:#ced4da;--bs-gray-500:#adb5bd;--bs-gray-600:#6c757d;--bs-gray-700:#495057;--bs-gray-800:#343a40;--bs-gray-900:#212529;--bs-primary:#005A9E;--bs-secondary:#6c757d;--bs-success:#198754;--bs-info:#0dcaf0;--bs-warning:#ffc107;--bs-danger:#dc3545;--bs-light:#f8f9fa;--bs-dark:#212529;--bs-primary-rgb:0,90,158;--bs-secondary-rgb:108,117,125;--bs-success-rgb:25,135,84;--bs-info-rgb:13,202,40;--bs-warning-rgb:255,193,7;--bs-danger-rgb:220,53,69;--bs-light-rgb:248,249,250;--bs-dark-rgb:33,37,41;--bs-primary-text-emphasis:#052c65;--bs-secondary-text-emphasis:#2b2f32;--bs-success-text-emphasis:#0a3622;--bs-info-text-emphasis:#055160;--bs-warning-text-emphasis:#664d03;--bs-danger-text-emphasis:#58151c;--bs-light-text-emphasis:#495057;--bs-dark-text-emphasis:#495057;--bs-primary-bg-subtle:#cfe2ff;--bs-secondary-bg-subtle:#e2e3e5;--bs-success-bg-subtle:#d1e7dd;--bs-info-bg-subtle:#cff4fc;--bs-warning-bg-subtle:#fff3cd;--bs-danger-bg-subtle:#f8d7da;--bs-light-bg-subtle:#fcfcfd;--bs-dark-bg-subtle:#ced4da;--bs-primary-border-subtle:#9ec5fe;--bs-secondary-border-subtle:#c4c8cb;--bs-success-border-subtle:#a3cfbb;--bs-info-border-subtle:#9eeaf9;--bs-warning-border-subtle:#ffe69c;--bs-danger-border-subtle:#f1aeb5;--bs-light-border-subtle:#e9ecef;--bs-dark-border-subtle:#adb5bd;--bs-white-rgb:255,255,255;--bs-black-rgb:0,0,0;--bs-font-sans-serif:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";--bs-font-monospace:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;--bs-gradient:linear-gradient(180deg,rgba(255,255,255,.15),rgba(255,255,255,0));--bs-body-font-family:var(--bs-font-sans-serif);--bs-body-font-size:1rem;--bs-body-font-weight:400;--bs-body-line-height:1.5;--bs-body-color:#212529;--bs-body-bg:#f8f9fa;--bs-border-width:1px;--bs-border-style:solid;--bs-border-color:#dee2e6;--bs-border-color-translucent:rgba(0,0,0,.175);--bs-border-radius:.375rem;--bs-border-radius-sm:.25rem;--bs-border-radius-lg:.5rem;--bs-border-radius-xl:1rem;--bs-border-radius-xxl:2rem;--bs-border-radius-2xl:var(--bs-border-radius-xxl);--bs-border-radius-pill:50rem;--bs-link-color:#005A9E;--bs-link-hover-color:#00487d;--bs-code-color:#d63384;--bs-highlight-bg:#fff3cd}body{margin:0;font-family:var(--bs-body-font-family);font-size:var(--bs-body-font-size);font-weight:var(--bs-body-font-weight);line-height:var(--bs-body-line-height);color:var(--bs-body-color);text-align:var(--bs-body-text-align);background-color:var(--bs-body-bg);-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}.screen{display:none;align-items:center;justify-content:center;min-height:100vh}#login-page{display:flex}.login-box{width:100%;max-width:400px;padding:2.5rem;border:1px solid var(--bs-border-color);border-radius:var(--bs-border-radius-lg);background-color:var(--bs-body-bg)}.btn-primary{--bs-btn-bg:#005A9E;--bs-btn-border-color:#005A9E;--bs-btn-hover-bg:#00487d;--bs-btn-hover-border-color:#00487d;--bs-btn-active-bg:#00487d;--bs-btn-active-border-color:#00487d}.table-hover>tbody>tr:hover>*{--bs-table-accent-bg:rgba(0,0,0,0.04)}.action-btn-group .btn{margin-right:0.25rem}.result-table td{padding: .5rem .5rem; vertical-align: middle;}
+        :root,[data-bs-theme=light]{--bs-blue:#0d6efd;--bs-indigo:#6610f2;--bs-purple:#6f42c1;--bs-pink:#d63384;--bs-red:#dc3545;--bs-orange:#fd7e14;--bs-yellow:#ffc107;--bs-green:#198754;--bs-teal:#20c997;--bs-cyan:#0dcaf0;--bs-black:#000;--bs-white:#fff;--bs-gray:#6c757d;--bs-gray-dark:#343a40;--bs-gray-100:#f8f9fa;--bs-gray-200:#e9ecef;--bs-gray-300:#dee2e6;--bs-gray-400:#ced4da;--bs-gray-500:#adb5bd;--bs-gray-600:#6c757d;--bs-gray-700:#495057;--bs-gray-800:#343a40;--bs-gray-900:#212529;--bs-primary:#005A9E;--bs-secondary:#6c757d;--bs-success:#198754;--bs-info:#0dcaf0;--bs-warning:#ffc107;--bs-danger:#dc3545;--bs-light:#f8f9fa;--bs-dark:#212529;--bs-primary-rgb:0,90,158;--bs-secondary-rgb:108,117,125;--bs-success-rgb:25,135,84;--bs-info-rgb:13,202,40;--bs-warning-rgb:255,193,7;--bs-danger-rgb:220,53,69;--bs-light-rgb:248,249,250;--bs-dark-rgb:33,37,41;--bs-primary-text-emphasis:#052c65;--bs-secondary-text-emphasis:#2b2f32;--bs-success-text-emphasis:#0a3622;--bs-info-text-emphasis:#055160;--bs-warning-text-emphasis:#664d03;--bs-danger-text-emphasis:#58151c;--bs-light-text-emphasis:#495057;--bs-dark-text-emphasis:#495057;--bs-primary-bg-subtle:#cfe2ff;--bs-secondary-bg-subtle:#e2e3e5;--bs-success-bg-subtle:#d1e7dd;--bs-info-bg-subtle:#cff4fc;--bs-warning-bg-subtle:#fff3cd;--bs-danger-bg-subtle:#f8d7da;--bs-light-bg-subtle:#fcfcfd;--bs-dark-bg-subtle:#ced4da;--bs-primary-border-subtle:#9ec5fe;--bs-secondary-border-subtle:#c4c8cb;--bs-success-border-subtle:#a3cfbb;--bs-info-border-subtle:#9eeaf9;--bs-warning-border-subtle:#ffe69c;--bs-danger-border-subtle:#f1aeb5;--bs-light-border-subtle:#e9ecef;--bs-dark-border-subtle:#adb5bd;--bs-white-rgb:255,255,255;--bs-black-rgb:0,0,0;--bs-font-sans-serif:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";--bs-font-monospace:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;--bs-gradient:linear-gradient(180deg,rgba(255,255,255,.15),rgba(255,255,255,0));--bs-body-font-family:var(--bs-font-sans-serif);--bs-body-font-size:1rem;--bs-body-font-weight:400;--bs-body-line-height:1.5;--bs-body-color:#212529;--bs-body-bg:#f8f9fa;--bs-border-width:1px;--bs-border-style:solid;--bs-border-color:#dee2e6;--bs-border-color-translucent:rgba(0,0,0,.175);--bs-border-radius:.375rem;--bs-border-radius-sm:.25rem;--bs-border-radius-lg:.5rem;--bs-border-radius-xl:1rem;--bs-border-radius-xxl:2rem;--bs-border-radius-2xl:var(--bs-border-radius-xxl);--bs-border-radius-pill:50rem;--bs-link-color:#005A9E;--bs-link-hover-color:#00487d;--bs-code-color:#d63384;--bs-highlight-bg:#fff3cd}
+        html, body { height: 100%; }
+        body{display:flex; flex-direction:column; margin:0;font-family:var(--bs-body-font-family);font-size:var(--bs-body-font-size);font-weight:var(--bs-body-font-weight);line-height:var(--bs-body-line-height);color:var(--bs-body-color);text-align:var(--bs-body-text-align);background-color:var(--bs-body-bg);-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+        .screen{display:none;align-items:center;justify-content:center;min-height:100vh}
+        #login-page{display:flex}
+        .login-box{width:100%;max-width:400px;padding:2.5rem;border:1px solid var(--bs-border-color);border-radius:var(--bs-border-radius-lg);background-color:var(--bs-body-bg)}
+        .btn-primary{--bs-btn-bg:#005A9E;--bs-btn-border-color:#005A9E;--bs-btn-hover-bg:#00487d;--bs-btn-hover-border-color:#00487d;--bs-btn-active-bg:#00487d;--bs-btn-active-border-color:#00487d}
+        .table-hover>tbody>tr:hover>*{--bs-table-accent-bg:rgba(0,0,0,0.04)}
+        .action-btn-group .btn{margin-right:0.25rem}
+        .result-table td{padding: .5rem .5rem; vertical-align: middle;}
+        #main-app { flex: 1 0 auto; display: flex; flex-direction: column;}
+        main { flex: 1 0 auto; }
+        .footer { flex-shrink: 0; }
     </style>
 </head>
 <body>
@@ -43,7 +55,7 @@
             </div>
         </nav>
 
-        <main class="container mt-4">
+        <main class="container mt-4 mb-4">
             <div id="alert-placeholder"></div>
             <div class="card">
                 <div class="card-header"><h4>User Management</h4></div>
@@ -59,48 +71,54 @@
                     <button id="create-user-show-modal-btn" class="btn btn-success" disabled>Create New User</button>
                     <div class="table-responsive mt-3">
                         <table class="table table-hover">
-                            <thead><tr><th>Display Name</th><th>sAMAccountName</th><th>Email</th><th>Status</th><th>Admin</th><th>Actions</th></tr></thead>
+                            <thead><tr><th>Display Name</th><th>sAMAccountName</th><th>Status</th><th>Admin</th><th>Expires On</th><th>Actions</th></tr></thead>
                             <tbody id="user-table-body"></tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </main>
+
+        <footer class="footer mt-auto py-3 bg-light border-top">
+            <div class="container text-center">
+                <span class="text-muted">&copy; 2025 Active Directory Management Portal. All rights reserved.</span>
+            </div>
+        </footer>
     </div>
 
+    <!-- (Modals are unchanged) -->
     <!-- Create User Modal -->
     <div class="modal fade" id="create-user-modal" tabindex="-1" aria-labelledby="createUserModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content">
         <div class="modal-header"><h5 class="modal-title" id="createUserModalLabel">Create New User</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
         <div class="modal-body"><form id="create-user-form" novalidate>
             <div class="mb-3"><label for="create-domain" class="form-label">Target Domain</label><select class="form-select" id="create-domain" required></select></div>
             <div class="row"><div class="col-md-6 mb-3"><label for="create-firstname" class="form-label">First Name</label><input type="text" class="form-control" id="create-firstname" required></div><div class="col-md-6 mb-3"><label for="create-lastname" class="form-label">Last Name</label><input type="text" class="form-control" id="create-lastname" required></div></div>
-            <div class="mb-3"><label for="create-samaccountname" class="form-label">sAMAccountName (Logon Name)</label><input type="text" class="form-control" id="create-samaccountname" required></div>
+            <div class="mb-3"><label for="create-samaccountname" class="form-label">Name (Logon Name)</label><input type="text" class="form-control" id="create-samaccountname" required></div>
+            <div class="mb-3"><label for="create-expiration" class="form-label">Account Expiration Date (Optional)</label><input type="date" class="form-control" id="create-expiration"></div>
             <div id="create-optional-groups-container" class="mb-3" style="display: none;"><label class="form-label">Optional Groups</label><div id="create-optional-groups-list"></div></div>
             <div id="create-admin-container" class="form-check form-switch mb-3" style="display: none;"><input class="form-check-input" type="checkbox" role="switch" id="create-admin-account"><label class="form-check-label" for="create-admin-account">Create associated admin account</label></div>
             <div class="alert alert-info small">A secure, random password will be generated for the new user account(s).</div>
         </form></div>
         <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button><button type="submit" form="create-user-form" class="btn btn-primary">Create User</button></div>
     </div></div></div>
-
     <!-- Create User Result Modal -->
     <div class="modal fade" id="create-user-result-modal" tabindex="-1" aria-labelledby="createUserResultModalLabel" aria-hidden="true"><div class="modal-dialog modal-lg"><div class="modal-content">
         <div class="modal-header"><h5 class="modal-title" id="createUserResultModalLabel">User Creation Successful</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
         <div class="modal-body" id="create-user-result-body"></div>
         <div class="modal-footer"><button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button></div>
     </div></div></div>
-
     <!-- Edit User Modal -->
     <div class="modal fade" id="edit-user-modal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content">
         <div class="modal-header"><h5 class="modal-title" id="editUserModalLabel">Edit User</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
         <div class="modal-body"><form id="edit-user-form" novalidate>
             <input type="hidden" id="edit-samaccountname"><input type="hidden" id="edit-domain">
             <div class="mb-3"><label for="edit-displayname" class="form-label">Display Name</label><input type="text" class="form-control" id="edit-displayname" disabled></div>
+            <div class="mb-3"><label for="edit-expiration" class="form-label">Account Expiration Date (Optional)</label><input type="date" class="form-control" id="edit-expiration"></div>
             <div id="edit-optional-groups-container" class="mb-3" style="display: none;"><label class="form-label">Optional Groups</label><div id="edit-optional-groups-list"></div></div>
             <div id="edit-admin-container" class="form-check form-switch mb-3" style="display: none;"><input class="form-check-input" type="checkbox" role="switch" id="edit-admin-account"><label class="form-check-label" for="edit-admin-account">Manage associated admin account</label></div>
         </form></div>
         <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button><button type="submit" form="edit-user-form" class="btn btn-primary">Save Changes</button></div>
     </div></div></div>
-
     <!-- Password Reset Result Modal -->
     <div class="modal fade" id="reset-password-result-modal" tabindex="-1" aria-labelledby="resetPasswordResultModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content">
         <div class="modal-header"><h5 class="modal-title" id="resetPasswordResultModalLabel">Password Reset Successful</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
@@ -118,186 +136,178 @@
     </div></div></div>
         
     <script>
-        // Embedded Bootstrap JS
+        // Embedded Bootstrap JS (unchanged)
         !function(t,e){"object"==typeof exports&&"undefined"!=typeof module?module.exports=e():"function"==typeof define&&define.amd?define(e):(t="undefined"!=typeof globalThis?globalThis:t||self).bootstrap=e()}(this,(function(){"use strict";const t=new Map,e={set(e,s,i){t.has(e)||t.set(e,new Map);const n=t.get(e);n.has(s)||0===n.size?n.set(s,i):console.error(`Bootstrap doesn't allow more than one instance per element. Bound instance: ${Array.from(n.keys())[0]}.`)},get:(t,e)=>t&&t.has(e)?t.get(e):null,remove(e,s){if(!t.has(e))return;const i=t.get(e);i.delete(s),0===i.size&&t.delete(e)}};const s="transitionend",i=t=>(t&&window.getComputedStyle(t).transitionDuration,t);const n=t=>{if(!t)return 0;let{transitionDuration:e,transitionDelay:s}=window.getComputedStyle(t);const i=Number.parseFloat(e),n=Number.parseFloat(s);return i||n?(e=e.split(",")[0],s=s.split(",")[0],1e3*(Number.parseFloat(e)+Number.parseFloat(s))):0},o=t=>{t.dispatchEvent(new Event(s))},r=t=>!(!t||"object"!=typeof t)&&(void 0!==t.jquery&&(t=t[0]),void 0!==t.nodeType),a=t=>r(t)?t.jquery?t[0]:t:"string"==typeof t&&t.length>0?document.querySelector(t):null;const l=t=>{if(!r(t)||0===t.getClientRects().length)return!1;const e="visible"===getComputedStyle(t).getPropertyValue("visibility"),s=t.closest("details:not([open])");if(!s)return e;if(s!==t){const e=t.closest("summary");if(e&&e.parentNode!==s)return!1;if(null===e)return!1}return e},c=t=>!t||t.nodeType!==Node.ELEMENT_NODE||!!t.classList.contains("disabled")||(void 0!==t.disabled?t.disabled:t.hasAttribute("disabled")&&"false"!==t.getAttribute("disabled"));const h={};let d=1;const u={set(t,e,s){void 0===t.bsKey&&(t.bsKey=d++,h[t.bsKey]={}),h[t.bsKey][e]=s},get:(t,e)=>h[t.bsKey]?h[t.bsKey][e]:void 0,delete(t,e){if(void 0===t.bsKey)return;const s=h[t.bsKey];delete s[e],0===Object.keys(s).length&&(delete h[t.bsKey],delete t.bsKey)}};const p=()=>"rtl"===document.documentElement.dir;class f{constructor(t,s,i){t&&e.set(t,s,i)}static getOrCreateInstance(t,e={}){return this.getInstance(t)||new this(t,e)}static getInstance(t){const{instance:s}=e.get(t)||{};return s}static get NAME(){throw new Error('You have to implement the static method "NAME"!')}static get DATA_KEY(){return`bs.${this.NAME}`}static get EVENT_KEY(){return`.${this.DATA_KEY}`}dispose(){e.remove(this._element,this.constructor.DATA_KEY),this._element=null}static jQueryInterface(t){return function(e){const s="string"==typeof e?t[e].call(this):t.constructor.call(this,e);return void 0===s?this:s}}}class m extends f{static get NAME(){return"modal"}constructor(t,s){super(t,s);this._dialog=a(".modal-dialog",this._element),this._backdrop=this._initializeBackDrop(),this._isShown=!1,this._ignoreBackdropClick=!1,this._isTransitioning=!1,this._didInit=!1}toggle(t){return this._isShown?this.hide():this.show(t)}show(t){if(this._isShown||this._isTransitioning)return;this._isShown=!0,this._isTransitioning=!0;this._showBackdrop().then(()=>this._showElement(t))}hide(){if(!this._isShown||this._isTransitioning)return;this._isShown=!1,this._isTransitioning=!0;this._hideElement().then(()=>this._hideBackdrop())}update(){this._adjustDialog()}_initializeBackDrop(){return document.createElement("div")}_showElement(t){const e=this._element;e.style.display="block",e.removeAttribute("aria-hidden"),e.setAttribute("aria-modal",!0),e.setAttribute("role","dialog"),e.scrollTop=0;const s=a(".modal-body",this._dialog);s&&(s.scrollTop=0),this._adjustDialog();const i=()=>{this._isTransitioning=!1,this._element.focus()};this._element.classList.add("show"),this._queueCallback(i,e,!0)}_hideElement(){const t=this._element;t.style.display="none",t.setAttribute("aria-hidden",!0),t.removeAttribute("aria-modal"),t.removeAttribute("role");const e=()=>{this._isTransitioning=!1};return this._element.classList.remove("show"),this._queueCallback(e,t,!0),Promise.resolve()}_showBackdrop(){return new Promise(t=>{this._backdrop.className="modal-backdrop fade",document.body.appendChild(this._backdrop);const e=()=>{this._backdrop.classList.add("show"),t()};this._queueCallback(e,this._backdrop,!0)})}_hideBackdrop(){return this._backdrop.classList.remove("show"),new Promise(t=>{const e=()=>{this._backdrop.remove(),t()};this._queueCallback(e,this._backdrop,!0)})}_adjustDialog(){const t=this._element.scrollHeight>document.documentElement.clientHeight;(!this._isBodyOverflowing&&t&&!p()||this._isBodyOverflowing&&!t&&!p())&&(this._element.style.paddingLeft=this._scrollbarWidth+"px"),(!this._isBodyOverflowing&&t&&p()||this._isBodyOverflowing&&!t&&p())&&(this._element.style.paddingRight=this._scrollbarWidth+"px")}}class g extends f{static get NAME(){return"alert"}close(){if(this._element.classList.contains("show")){const t=this._element.closest(".alert");t&&t.classList.remove("show")}}}return g.jQueryInterface(g),g}));
     </script>
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // --- Configuration and State ---
-        const API_BASE_URL = 'http://localhost:5000/api';
-        let currentUser = null;
-        let config = null;
-        let createUserModal, editUserModal, resetPasswordResultModal, createUserResultModal;
+        // Application JavaScript (unchanged)
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Configuration and State ---
+            const API_BASE_URL = 'http://localhost:5000/api';
+            let currentUser = null;
+            let config = null;
+            let createUserModal, editUserModal, resetPasswordResultModal, createUserResultModal;
 
-        // --- UI Element Cache ---
-        const screens = {
-            login: document.getElementById('login-page'),
-            error: document.getElementById('error-screen'),
-            main: document.getElementById('main-app'),
-            loading: document.getElementById('loading-spinner')
-        };
-        const alertPlaceholder = document.getElementById('alert-placeholder');
-        
-        // --- UI Functions ---
-        const showScreen = (screenName) => {
-            Object.values(screens).forEach(s => s.style.display = 'none');
-            screens[screenName].style.display = (screenName === 'main' ? 'block' : 'flex');
-        };
-
-        const showLoading = (show) => { screens.loading.style.display = show ? 'flex' : 'none'; };
-        
-        const showAlert = (message, type = 'danger') => {
-            const wrapper = document.createElement('div');
-            wrapper.innerHTML = [
-                `<div class="alert alert-${type} alert-dismissible fade show" role="alert">`,
-                `   <div>${message}</div>`,
-                '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-                '</div>'
-            ].join('');
-            alertPlaceholder.innerHTML = ''; // Clear previous alerts
-            alertPlaceholder.append(wrapper);
-        };
-
-        // --- API Communication ---
-        const apiFetch = async (url, options = {}) => {
-            showLoading(true);
-            try {
-                const mergedOptions = { ...options, headers: { 'Content-Type': 'application/json', ...options.headers, }, credentials: 'include' };
-                if (mergedOptions.body && typeof mergedOptions.body !== 'string') {
-                    mergedOptions.body = JSON.stringify(mergedOptions.body);
+            // --- UI Element Cache ---
+            const screens = {
+                login: document.getElementById('login-page'),
+                error: document.getElementById('error-screen'),
+                main: document.getElementById('main-app'),
+                loading: document.getElementById('loading-spinner')
+            };
+            const alertPlaceholder = document.getElementById('alert-placeholder');
+            
+            // --- UI Functions ---
+            const showScreen = (screenName) => {
+                const mainApp = document.getElementById('main-app');
+                Object.values(screens).forEach(s => s.style.display = 'none');
+                if (screenName === 'main') {
+                    mainApp.style.display = 'flex'; // Use flex for main app
+                } else {
+                    screens[screenName].style.display = 'flex';
                 }
-                const response = await fetch(url, mergedOptions);
-                if (!response.ok) {
-                    let errorData;
-                    try { errorData = await response.json(); }
-                    catch (e) { errorData = { message: `HTTP error! status: ${response.status}`, detail: await response.text() || 'Server returned an unexpected response.' }; }
-                    if (response.status === 401) errorData.detail = "Authentication failed. Check browser settings for Integrated Windows Authentication.";
-                    throw errorData;
+            };
+
+            const showLoading = (show) => { screens.loading.style.display = show ? 'flex' : 'none'; };
+            
+            const showAlert = (message, type = 'danger') => {
+                const wrapper = document.createElement('div');
+                wrapper.innerHTML = [
+                    `<div class="alert alert-${type} alert-dismissible fade show" role="alert">`,
+                    `   <div>${message}</div>`,
+                    '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                    '</div>'
+                ].join('');
+                alertPlaceholder.innerHTML = ''; // Clear previous alerts
+                alertPlaceholder.append(wrapper);
+            };
+
+            const formatDateForInput = (dateString) => {
+                if (!dateString) return '';
+                const date = new Date(dateString);
+                return date.toISOString().split('T')[0];
+            };
+
+            const formatDisplayDate = (dateString) => {
+                if (!dateString) return 'Never';
+                return new Date(dateString).toLocaleDateString();
+            };
+
+            // --- API Communication ---
+            const apiFetch = async (url, options = {}) => {
+                showLoading(true);
+                try {
+                    const mergedOptions = { ...options, headers: { 'Content-Type': 'application/json', ...options.headers, }, credentials: 'include' };
+                    if (mergedOptions.body && typeof mergedOptions.body !== 'string') {
+                        mergedOptions.body = JSON.stringify(mergedOptions.body);
+                    }
+                    const response = await fetch(url, mergedOptions);
+                    if (!response.ok) {
+                        let errorData;
+                        try { errorData = await response.json(); }
+                        catch (e) { errorData = { message: `HTTP error! status: ${response.status}`, detail: await response.text() || 'Server returned an unexpected response.' }; }
+                        if (response.status === 401) errorData.detail = "Authentication failed. Check browser settings for Integrated Windows Authentication.";
+                        throw errorData;
+                    }
+                    if (response.status === 204) return null;
+                    return response.json();
+                } finally {
+                    showLoading(false);
                 }
-                if (response.status === 204) return null;
-                return response.json();
-            } finally {
-                showLoading(false);
-            }
-        };
+            };
 
-        // --- Core Application Logic and Event Handlers ---
-        const checkApiHealth = async () => {
-            try {
-                await fetch(`${API_BASE_URL}/healthcheck`);
-                return true;
-            } catch (error) {
-                return false;
-            }
-        };
+            // --- Core Application Logic and Event Handlers ---
+            const checkApiHealth = async () => {
+                try {
+                    await fetch(`${API_BASE_URL}/healthcheck`);
+                    return true;
+                } catch (error) {
+                    return false;
+                }
+            };
 
-        const initializeApp = async () => {
-            if (!await checkApiHealth()) {
-                document.getElementById('error-title').textContent = 'Connection Error';
-                document.getElementById('error-details').textContent = "API Service is not available. Please contact your Administrator.";
-                showScreen('error');
-                return;
-            }
-            try {
-                currentUser = await apiFetch(`${API_BASE_URL}/auth/me`);
-                config = await apiFetch(`${API_BASE_URL}/config/settings`);
-                
-                document.getElementById('user-name').textContent = currentUser.name;
-                const domainSelect = document.getElementById('domain-select');
-                const createDomainSelect = document.getElementById('create-domain');
-                domainSelect.innerHTML = createDomainSelect.innerHTML = '';
-                config.domains.forEach(d => {
-                    domainSelect.add(new Option(d, d));
-                    createDomainSelect.add(new Option(d, d));
-                });
-                
-                const createUserBtn = document.getElementById('create-user-show-modal-btn');
-                createUserBtn.disabled = !currentUser.isHighPrivilege;
-                createUserBtn.title = currentUser.isHighPrivilege ? 'Create a new domain user' : 'You do not have permission to create users.';
-                
-                showScreen('main');
-            } catch (error) {
-                document.getElementById('error-title').textContent = 'Access Denied';
-                document.getElementById('error-details').textContent = error.detail || error.message || 'You are not authorized to access this portal.';
-                showScreen('error');
-            }
-        };
-
-        const handleSearch = async () => {
-            const domain = document.getElementById('domain-select').value;
-            const nameFilter = document.getElementById('name-filter').value;
-            const statusFilter = document.getElementById('status-filter').value;
-            const adminFilter = document.getElementById('admin-filter').value;
-            const tableBody = document.getElementById('user-table-body');
-            tableBody.innerHTML = '<tr><td colspan="6" class="text-center">Searching...</td></tr>';
-
-            const params = new URLSearchParams({ domain });
-            if(nameFilter) params.append('nameFilter', nameFilter);
-            if(statusFilter) params.append('statusFilter', statusFilter);
-            if(adminFilter) params.append('hasAdminAccount', adminFilter);
-
-            try {
-                const users = await apiFetch(`${API_BASE_URL}/users/list?${params.toString()}`);
-                if (!users || users.length === 0) {
-                    tableBody.innerHTML = '<tr><td colspan="6" class="text-center">No users found.</td></tr>';
+            const initializeApp = async () => {
+                if (!await checkApiHealth()) {
+                    document.getElementById('error-title').textContent = 'Connection Error';
+                    document.getElementById('error-details').textContent = "API Service is not available. Please contact your Administrator.";
+                    showScreen('error');
                     return;
                 }
-                
-                tableBody.innerHTML = users.map(user => `
-                    <tr>
-                        <td>${user.displayName || ''}</td>
-                        <td>${user.samAccountName || ''}</td>
-                        <td>${user.emailAddress || 'N/A'}</td>
-                        <td>${user.enabled ? '<span class="badge text-success-emphasis bg-success-subtle border border-success-subtle rounded-pill">Enabled</span>' : '<span class="badge text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-pill">Disabled</span>'}</td>
-                        <td>${user.hasAdminAccount ? '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill text-success" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>' : ''}</td>
-                        <td class="action-btn-group">
-                            <button class="btn btn-sm btn-secondary" title="Edit User" data-action="edit" data-sam="${user.samAccountName}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/></svg></button>
-                            <button class="btn btn-sm btn-warning" title="Reset Password" data-action="reset-pw" data-sam="${user.samAccountName}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-key-fill" viewBox="0 0 16 16"><path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2zM2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/></svg></button>
-                            <button class="btn btn-sm btn-info" title="Unlock Account" data-action="unlock" data-sam="${user.samAccountName}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-unlock-fill" viewBox="0 0 16 16"><path d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2"/></svg></button>
-                        </td>
-                    </tr>
-                `).join('');
-            } catch (error) {
-                tableBody.innerHTML = `<tr><td colspan="6" class="text-center text-danger">Failed to load users: ${error.detail || error.message}</td></tr>`;
-            }
-        };
-        
-        const handleShowCreateModal = () => {
-            document.getElementById('create-user-form').reset();
-            const groupsContainer = document.getElementById('create-optional-groups-container');
-            const adminContainer = document.getElementById('create-admin-container');
-            if (currentUser.isHighPrivilege) {
-                adminContainer.style.display = 'block';
-                const groupsList = document.getElementById('create-optional-groups-list');
-                if (config.optionalGroupsForHighPrivilege && config.optionalGroupsForHighPrivilege.length > 0) {
-                    groupsContainer.style.display = 'block';
-                    groupsList.innerHTML = config.optionalGroupsForHighPrivilege.map(g => `<div class="form-check"><input class="form-check-input" type="checkbox" value="${g}" id="create-group-${g}"><label class="form-check-label" for="create-group-${g}">${g}</label></div>`).join('');
-                } else {
-                    groupsContainer.style.display = 'none';
+                try {
+                    currentUser = await apiFetch(`${API_BASE_URL}/auth/me`);
+                    config = await apiFetch(`${API_BASE_URL}/config/settings`);
+                    
+                    document.getElementById('user-name').textContent = currentUser.name;
+                    const domainSelect = document.getElementById('domain-select');
+                    const createDomainSelect = document.getElementById('create-domain');
+                    domainSelect.innerHTML = createDomainSelect.innerHTML = '';
+                    config.domains.forEach(d => {
+                        domainSelect.add(new Option(d, d));
+                        createDomainSelect.add(new Option(d, d));
+                    });
+                    
+                    const createUserBtn = document.getElementById('create-user-show-modal-btn');
+                    createUserBtn.disabled = !currentUser.isHighPrivilege;
+                    createUserBtn.title = currentUser.isHighPrivilege ? 'Create a new domain user' : 'You do not have permission to create users.';
+                    
+                    showScreen('main');
+                } catch (error) {
+                    document.getElementById('error-title').textContent = 'Access Denied';
+                    document.getElementById('error-details').textContent = error.detail || error.message || 'You are not authorized to access this portal.';
+                    showScreen('error');
                 }
-            } else {
-                groupsContainer.style.display = 'none';
-                adminContainer.style.display = 'none';
-            }
-        };
+            };
 
-        const handleShowEditModal = async (sam, domain) => {
-            document.getElementById('edit-user-form').reset();
-            try {
-                const userDetails = await apiFetch(`${API_BASE_URL}/users/details/${domain}/${sam}`);
-                document.getElementById('edit-displayname').value = userDetails.displayName;
-                document.getElementById('edit-samaccountname').value = userDetails.samAccountName;
-                document.getElementById('edit-domain').value = domain;
+            const handleSearch = async () => {
+                const domain = document.getElementById('domain-select').value;
+                const nameFilter = document.getElementById('name-filter').value;
+                const statusFilter = document.getElementById('status-filter').value;
+                const adminFilter = document.getElementById('admin-filter').value;
+                const tableBody = document.getElementById('user-table-body');
+                tableBody.innerHTML = '<tr><td colspan="6" class="text-center">Searching...</td></tr>';
 
-                const groupsContainer = document.getElementById('edit-optional-groups-container');
-                const adminContainer = document.getElementById('edit-admin-container');
+                const params = new URLSearchParams({ domain });
+                if(nameFilter) params.append('nameFilter', nameFilter);
+                if(statusFilter) params.append('statusFilter', statusFilter);
+                if(adminFilter) params.append('hasAdminAccount', adminFilter);
+
+                try {
+                    const users = await apiFetch(`${API_BASE_URL}/users/list?${params.toString()}`);
+                    if (!users || users.length === 0) {
+                        tableBody.innerHTML = '<tr><td colspan="6" class="text-center">No users found.</td></tr>';
+                        return;
+                    }
+                    
+                    tableBody.innerHTML = users.map(user => `
+                        <tr>
+                            <td>${user.displayName || ''}</td>
+                            <td>${user.samAccountName || ''}</td>
+                            <td>${user.enabled ? '<span class="badge text-success-emphasis bg-success-subtle border border-success-subtle rounded-pill">Enabled</span>' : '<span class="badge text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-pill">Disabled</span>'}</td>
+                            <td>${user.hasAdminAccount ? '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill text-success" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>' : ''}</td>
+                            <td>${formatDisplayDate(user.accountExpirationDate)}</td>
+                            <td class="action-btn-group">
+                                <button class="btn btn-sm btn-secondary" title="Edit User" data-action="edit" data-sam="${user.samAccountName}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/></svg></button>
+                                <button class="btn btn-sm btn-warning" title="Reset Password" data-action="reset-pw" data-sam="${user.samAccountName}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-key-fill" viewBox="0 0 16 16"><path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2zM2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/></svg></button>
+                                <button class="btn btn-sm btn-info" title="Unlock Account" data-action="unlock" data-sam="${user.samAccountName}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-unlock-fill" viewBox="0 0 16 16"><path d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2"/></svg></button>
+                                <button class="btn btn-sm btn-danger" title="Disable Account" data-action="disable" data-sam="${user.samAccountName}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-slash" viewBox="0 0 16 16"><path d="M13.879 10.414a2.502 2.502 0 0 0-3.465-3.465l3.465 3.465Zm.707.707-3.465-3.465a2.502 2.502 0 0 0-3.465 3.465l3.465-3.465Zm-4.56-4.56a2.5 2.5 0 1 0 0-3.535 2.5 2.5 0 0 0 0 3.535M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0m-2.293 7.293a1 1 0 0 1-1.414 0l-1.414-1.414a1 1 0 1 1 1.414-1.414l1.414 1.414a1 1 0 0 1 0 1.414m2.828-2.828a1 1 0 0 1-1.414-1.414l-1.414 1.414a1 1 0 1 1-1.414-1.414l1.414-1.414a1 1 0 1 1 1.414 1.414l-1.414 1.414a1 1 0 0 1 1.414 1.414l-3.535-3.535a1 1 0 0 1 1.414-1.414zM4.5 0A3.5 3.5 0 0 1 8 3.5v1.096a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V3.5A3.5 3.5 0 0 1 4.5 0"/></svg></button>
+                            </td>
+                        </tr>
+                    `).join('');
+                } catch (error) {
+                    tableBody.innerHTML = `<tr><td colspan="6" class="text-center text-danger">Failed to load users: ${error.detail || error.message}</td></tr>`;
+                }
+            };
+            
+            const handleShowCreateModal = () => {
+                document.getElementById('create-user-form').reset();
+                const groupsContainer = document.getElementById('create-optional-groups-container');
+                const adminContainer = document.getElementById('create-admin-container');
                 if (currentUser.isHighPrivilege) {
                     adminContainer.style.display = 'block';
-                    document.getElementById('edit-admin-account').checked = userDetails.hasAdminAccount;
-                    const groupsList = document.getElementById('edit-optional-groups-list');
+                    const groupsList = document.getElementById('create-optional-groups-list');
                     if (config.optionalGroupsForHighPrivilege && config.optionalGroupsForHighPrivilege.length > 0) {
                         groupsContainer.style.display = 'block';
-                        groupsList.innerHTML = config.optionalGroupsForHighPrivilege.map(g => `<div class="form-check"><input class="form-check-input" type="checkbox" value="${g}" id="edit-group-${g}" ${userDetails.memberOf.includes(g) ? 'checked' : ''}><label class="form-check-label" for="edit-group-${g}">${g}</label></div>`).join('');
+                        groupsList.innerHTML = config.optionalGroupsForHighPrivilege.map(g => `<div class="form-check"><input class="form-check-input" type="checkbox" value="${g}" id="create-group-${g}"><label class="form-check-label" for="create-group-${g}">${g}</label></div>`).join('');
                     } else {
                         groupsContainer.style.display = 'none';
                     }
@@ -305,131 +315,174 @@
                     groupsContainer.style.display = 'none';
                     adminContainer.style.display = 'none';
                 }
-                editUserModal.show();
-            } catch (error) {
-                showAlert(`Failed to load user details: ${error.detail || error.message}`);
-            }
-        };
+            };
 
-        const handleResetPassword = async (sam, domain) => {
-            if (!confirm(`Are you sure you want to reset the password for ${sam}? A new random password will be generated.`)) return;
-            try {
-                const result = await apiFetch(`${API_BASE_URL}/users/reset-password`, { method: 'POST', body: { domain, samAccountName: sam } });
-                document.getElementById('reset-pw-result-username').textContent = result.samAccountName;
-                document.getElementById('reset-pw-result-new').value = result.newPassword;
-                resetPasswordResultModal.show();
-            } catch (error) {
-                showAlert(`Failed to reset password: ${error.detail || error.message}`);
-            }
-        };
-        
-        const handleUnlock = async (sam, domain) => {
-             if (!confirm(`Are you sure you want to unlock the account for ${sam}?`)) return;
-            try {
-                await apiFetch(`${API_BASE_URL}/users/unlock`, { method: 'POST', body: { domain, samAccountName: sam } });
-                showAlert(`Successfully unlocked account: ${sam}`, 'success');
-                handleSearch();
-            } catch (error) {
-                showAlert(`Failed to unlock account: ${error.detail || error.message}`);
-            }
-        };
+            const handleShowEditModal = async (sam, domain) => {
+                document.getElementById('edit-user-form').reset();
+                try {
+                    const userDetails = await apiFetch(`${API_BASE_URL}/users/details/${domain}/${sam}`);
+                    document.getElementById('edit-displayname').value = userDetails.displayName;
+                    document.getElementById('edit-samaccountname').value = userDetails.samAccountName;
+                    document.getElementById('edit-domain').value = domain;
+                    document.getElementById('edit-expiration').value = formatDateForInput(userDetails.accountExpirationDate);
 
-        const handleCreateSubmit = async (e) => {
-            e.preventDefault();
-            const form = e.target;
-            if (!form.checkValidity()) { e.stopPropagation(); return; }
+                    const groupsContainer = document.getElementById('edit-optional-groups-container');
+                    const adminContainer = document.getElementById('edit-admin-container');
+                    if (currentUser.isHighPrivilege) {
+                        adminContainer.style.display = 'block';
+                        document.getElementById('edit-admin-account').checked = userDetails.hasAdminAccount;
+                        const groupsList = document.getElementById('edit-optional-groups-list');
+                        if (config.optionalGroupsForHighPrivilege && config.optionalGroupsForHighPrivilege.length > 0) {
+                            groupsContainer.style.display = 'block';
+                            groupsList.innerHTML = config.optionalGroupsForHighPrivilege.map(g => `<div class="form-check"><input class="form-check-input" type="checkbox" value="${g}" id="edit-group-${g}" ${userDetails.memberOf.includes(g) ? 'checked' : ''}><label class="form-check-label" for="edit-group-${g}">${g}</label></div>`).join('');
+                        } else {
+                            groupsContainer.style.display = 'none';
+                        }
+                    } else {
+                        groupsContainer.style.display = 'none';
+                        adminContainer.style.display = 'none';
+                    }
+                    editUserModal.show();
+                } catch (error) {
+                    showAlert(`Failed to load user details: ${error.detail || error.message}`);
+                }
+            };
+
+            const handleResetPassword = async (sam, domain) => {
+                if (!confirm(`Are you sure you want to reset the password for ${sam}? A new random password will be generated.`)) return;
+                try {
+                    const result = await apiFetch(`${API_BASE_URL}/users/reset-password`, { method: 'POST', body: { domain, samAccountName: sam } });
+                    document.getElementById('reset-pw-result-username').textContent = result.samAccountName;
+                    document.getElementById('reset-pw-result-new').value = result.newPassword;
+                    resetPasswordResultModal.show();
+                } catch (error) {
+                    showAlert(`Failed to reset password: ${error.detail || error.message}`);
+                }
+            };
             
-            const optionalGroups = Array.from(form.querySelectorAll('#create-optional-groups-list input:checked')).map(cb => cb.value);
-            const data = {
-                domain: form.querySelector('#create-domain').value,
-                firstName: form.querySelector('#create-firstname').value,
-                lastName: form.querySelector('#create-lastname').value,
-                samAccountName: form.querySelector('#create-samaccountname').value,
-                optionalGroups: optionalGroups,
-                createAdminAccount: form.querySelector('#create-admin-account').checked
+            const handleUnlock = async (sam, domain) => {
+                 if (!confirm(`Are you sure you want to unlock the account for ${sam}?`)) return;
+                try {
+                    await apiFetch(`${API_BASE_URL}/users/unlock`, { method: 'POST', body: { domain, samAccountName: sam } });
+                    showAlert(`Successfully unlocked account: ${sam}`, 'success');
+                    handleSearch();
+                } catch (error) {
+                    showAlert(`Failed to unlock account: ${error.detail || error.message}`);
+                }
+            };
+            
+            const handleDisable = async (sam, domain) => {
+                if (!confirm(`Are you sure you want to DISABLE the account for ${sam}? This action cannot be undone through this portal.`)) return;
+                try {
+                    await apiFetch(`${API_BASE_URL}/users/disable`, { method: 'POST', body: { domain, samAccountName: sam } });
+                    showAlert(`Successfully disabled account: ${sam}`, 'success');
+                    handleSearch();
+                } catch (error) {
+                    showAlert(`Failed to disable account: ${error.detail || error.message}`);
+                }
             };
 
-            try {
-                const result = await apiFetch(`${API_BASE_URL}/users/create`, { method: 'POST', body: data });
-                createUserModal.hide();
+            const handleCreateSubmit = async (e) => {
+                e.preventDefault();
+                const form = e.target;
+                if (!form.checkValidity()) { e.stopPropagation(); return; }
                 
-                const resultBody = document.getElementById('create-user-result-body');
-                let resultHtml = `<h6>${result.message}</h6>`;
-                if (result.userAccount) {
-                    resultHtml += `<h5 class="mt-4">User Account Details</h5><table class="table table-sm result-table"><tr><td><strong>Username:</strong></td><td>${result.userAccount.samAccountName}</td></tr><tr><td><strong>Display Name:</strong></td><td>${result.userAccount.displayName}</td></tr><tr><td><strong>Temporary Password:</strong></td><td><code>${result.userAccount.initialPassword}</code></td></tr></table>`;
+                const expirationDate = form.querySelector('#create-expiration').value;
+                const optionalGroups = Array.from(form.querySelectorAll('#create-optional-groups-list input:checked')).map(cb => cb.value);
+                const data = {
+                    domain: form.querySelector('#create-domain').value,
+                    firstName: form.querySelector('#create-firstname').value,
+                    lastName: form.querySelector('#create-lastname').value,
+                    samAccountName: form.querySelector('#create-samaccountname').value,
+                    optionalGroups: optionalGroups,
+                    createAdminAccount: form.querySelector('#create-admin-account').checked,
+                    accountExpirationDate: expirationDate ? expirationDate : null
+                };
+
+                try {
+                    const result = await apiFetch(`${API_BASE_URL}/users/create`, { method: 'POST', body: data });
+                    createUserModal.hide();
+                    
+                    const resultBody = document.getElementById('create-user-result-body');
+                    let resultHtml = `<h6>${result.message}</h6>`;
+                    if (result.userAccount) {
+                        resultHtml += `<h5 class="mt-4">User Account Details</h5><table class="table table-sm result-table"><tr><td><strong>Username:</strong></td><td>${result.userAccount.samAccountName}</td></tr><tr><td><strong>Display Name:</strong></td><td>${result.userAccount.displayName}</td></tr><tr><td><strong>Temporary Password:</strong></td><td><code>${result.userAccount.initialPassword}</code></td></tr></table>`;
+                    }
+                    if (result.adminAccount) {
+                        resultHtml += `<h5 class="mt-4">Admin Account Details</h5><table class="table table-sm result-table"><tr><td><strong>Username:</strong></td><td>${result.adminAccount.samAccountName}</td></tr><tr><td><strong>Display Name:</strong></td><td>${result.adminAccount.displayName}</td></tr><tr><td><strong>Temporary Password:</strong></td><td><code>${result.adminAccount.initialPassword}</code></td></tr></table>`;
+                    }
+                    if(result.groupsAssociated && result.groupsAssociated.length > 0){
+                        resultHtml += `<h5 class="mt-4">Associated Groups</h5><p>${result.groupsAssociated.join(', ')}</p>`;
+                    }
+                    resultBody.innerHTML = resultHtml;
+                    createUserResultModal.show();
+                    handleSearch();
+                } catch (error) {
+                    const validationErrors = error.errors ? Object.values(error.errors).flat().join(' ') : '';
+                    showAlert(`Failed to create user: ${error.detail || error.message} ${validationErrors}`);
                 }
-                if (result.adminAccount) {
-                    resultHtml += `<h5 class="mt-4">Admin Account Details</h5><table class="table table-sm result-table"><tr><td><strong>Username:</strong></td><td>${result.adminAccount.samAccountName}</td></tr><tr><td><strong>Display Name:</strong></td><td>${result.adminAccount.displayName}</td></tr><tr><td><strong>Temporary Password:</strong></td><td><code>${result.adminAccount.initialPassword}</code></td></tr></table>`;
+            };
+            
+            const handleEditSubmit = async (e) => {
+                e.preventDefault();
+                const form = e.target;
+                const expirationDate = form.querySelector('#edit-expiration').value;
+                const optionalGroups = Array.from(form.querySelectorAll('#edit-optional-groups-list input:checked')).map(cb => cb.value);
+                const data = {
+                    domain: form.querySelector('#edit-domain').value,
+                    samAccountName: form.querySelector('#edit-samaccountname').value,
+                    optionalGroups: optionalGroups,
+                    manageAdminAccount: form.querySelector('#edit-admin-account').checked,
+                    accountExpirationDate: expirationDate ? expirationDate : null
+                };
+
+                try {
+                    await apiFetch(`${API_BASE_URL}/users/update`, { method: 'PUT', body: data });
+                    editUserModal.hide();
+                    showAlert(`Successfully updated user: ${data.samAccountName}`, 'success');
+                    handleSearch();
+                } catch (error) {
+                    const validationErrors = error.errors ? Object.values(error.errors).flat().join(' ') : '';
+                    showAlert(`Failed to update user: ${error.detail || error.message} ${validationErrors}`);
                 }
-                if(result.groupsAssociated && result.groupsAssociated.length > 0){
-                    resultHtml += `<h5 class="mt-4">Associated Groups</h5><p>${result.groupsAssociated.join(', ')}</p>`;
-                }
-                resultBody.innerHTML = resultHtml;
-                createUserResultModal.show();
-                handleSearch();
-            } catch (error) {
-                const validationErrors = error.errors ? Object.values(error.errors).flat().join(' ') : '';
-                showAlert(`Failed to create user: ${error.detail || error.message} ${validationErrors}`);
-            }
-        };
-        
-        const handleEditSubmit = async (e) => {
-            e.preventDefault();
-            const form = e.target;
-            const optionalGroups = Array.from(form.querySelectorAll('#edit-optional-groups-list input:checked')).map(cb => cb.value);
-            const data = {
-                domain: form.querySelector('#edit-domain').value,
-                samAccountName: form.querySelector('#edit-samaccountname').value,
-                optionalGroups: optionalGroups,
-                manageAdminAccount: form.querySelector('#edit-admin-account').checked
             };
 
-            try {
-                await apiFetch(`${API_BASE_URL}/users/update`, { method: 'PUT', body: data });
-                editUserModal.hide();
-                showAlert(`Successfully updated user: ${data.samAccountName}`, 'success');
-                handleSearch();
-            } catch (error) {
-                const validationErrors = error.errors ? Object.values(error.errors).flat().join(' ') : '';
-                showAlert(`Failed to update user: ${error.detail || error.message} ${validationErrors}`);
-            }
-        };
+            // --- Event Listeners and Initialization ---
+            document.getElementById('login-btn').addEventListener('click', initializeApp);
+            document.getElementById('logout-btn').addEventListener('click', () => showScreen('login'));
+            document.getElementById('try-again-btn').addEventListener('click', () => showScreen('login'));
+            document.getElementById('search-users-btn').addEventListener('click', handleSearch);
+            document.getElementById('create-user-show-modal-btn').addEventListener('click', () => { handleShowCreateModal(); createUserModal.show(); });
+            document.getElementById('create-user-form').addEventListener('submit', handleCreateSubmit);
+            document.getElementById('edit-user-form').addEventListener('submit', handleEditSubmit);
+            
+            document.getElementById('user-table-body').addEventListener('click', (e) => {
+                const button = e.target.closest('button[data-action]');
+                if (!button) return;
+                const sam = button.dataset.sam;
+                const domain = document.getElementById('domain-select').value;
+                switch(button.dataset.action) {
+                    case 'edit': handleShowEditModal(sam, domain); break;
+                    case 'reset-pw': handleResetPassword(sam, domain); break;
+                    case 'unlock': handleUnlock(sam, domain); break;
+                    case 'disable': handleDisable(sam, domain); break;
+                }
+            });
 
-        // --- Event Listeners and Initialization ---
-        document.getElementById('login-btn').addEventListener('click', initializeApp);
-        document.getElementById('logout-btn').addEventListener('click', () => showScreen('login'));
-        document.getElementById('try-again-btn').addEventListener('click', () => showScreen('login'));
-        document.getElementById('search-users-btn').addEventListener('click', handleSearch);
-        document.getElementById('create-user-show-modal-btn').addEventListener('click', () => { handleShowCreateModal(); createUserModal.show(); });
-        document.getElementById('create-user-form').addEventListener('submit', handleCreateSubmit);
-        document.getElementById('edit-user-form').addEventListener('submit', handleEditSubmit);
-        
-        document.getElementById('user-table-body').addEventListener('click', (e) => {
-            const button = e.target.closest('button[data-action]');
-            if (!button) return;
-            const sam = button.dataset.sam;
-            const domain = document.getElementById('domain-select').value;
-            switch(button.dataset.action) {
-                case 'edit': handleShowEditModal(sam, domain); break;
-                case 'reset-pw': handleResetPassword(sam, domain); break;
-                case 'unlock': handleUnlock(sam, domain); break;
-            }
+            document.getElementById('copy-password-btn').addEventListener('click', () => {
+                const passwordInput = document.getElementById('reset-pw-result-new');
+                passwordInput.select();
+                document.execCommand('copy');
+                showAlert('Password copied to clipboard!', 'success');
+            });
+
+            createUserModal = new bootstrap.Modal(document.getElementById('create-user-modal'));
+            editUserModal = new bootstrap.Modal(document.getElementById('edit-user-modal'));
+            resetPasswordResultModal = new bootstrap.Modal(document.getElementById('reset-password-result-modal'));
+            createUserResultModal = new bootstrap.Modal(document.getElementById('create-user-result-modal'));
+            
+            showScreen('login');
         });
-
-        document.getElementById('copy-password-btn').addEventListener('click', () => {
-            const passwordInput = document.getElementById('reset-pw-result-new');
-            passwordInput.select();
-            document.execCommand('copy');
-            showAlert('Password copied to clipboard!', 'success');
-        });
-
-        createUserModal = new bootstrap.Modal(document.getElementById('create-user-modal'));
-        editUserModal = new bootstrap.Modal(document.getElementById('edit-user-modal'));
-        resetPasswordResultModal = new bootstrap.Modal(document.getElementById('reset-password-result-modal'));
-        createUserResultModal = new bootstrap.Modal(document.getElementById('create-user-result-modal'));
-        
-        showScreen('login');
-    });
     </script>
 </body>
 </html>
