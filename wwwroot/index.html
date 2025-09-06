@@ -86,7 +86,7 @@
         </footer>
     </div>
 
-    <!-- (Modals are unchanged) -->
+    <!-- Create User Modal -->
     <div class="modal fade" id="create-user-modal" tabindex="-1" aria-labelledby="createUserModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content">
         <div class="modal-header"><h5 class="modal-title" id="createUserModalLabel">Create New User</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
         <div class="modal-body"><form id="create-user-form" novalidate>
@@ -100,6 +100,8 @@
         </form></div>
         <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button><button type="submit" form="create-user-form" class="btn btn-primary">Create User</button></div>
     </div></div></div>
+    
+    <!-- (Other modals are unchanged) -->
     <div class="modal fade" id="create-user-result-modal" tabindex="-1" aria-labelledby="createUserResultModalLabel" aria-hidden="true"><div class="modal-dialog modal-lg"><div class="modal-content">
         <div class="modal-header"><h5 class="modal-title" id="createUserResultModalLabel">User Creation Successful</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
         <div class="modal-body" id="create-user-result-body"></div>
@@ -132,162 +134,140 @@
     </div></div></div>
         
     <script>
-        // Full Bootstrap v5.3.2 JS (unchanged)
-        !function(t,e){"object"==typeof exports&&"undefined"!=typeof module?module.exports=e():"function"==typeof define&&define.amd?define(e):(t="undefined"!=typeof globalThis?globalThis:t||self).bootstrap=e()}(this,(function(){"use strict";const t="transitionend",e=e=>(e&&window.getComputedStyle(e).transitionDuration,e),i=i=>{if(!i)return 0;let{transitionDuration:t,transitionDelay:s}=window.getComputedStyle(i);const n=Number.parseFloat(t),o=Number.parseFloat(s);return n||o?(t=t.split(",")[0],s=s.split(",")[0],1e3*(Number.parseFloat(t)+Number.parseFloat(s))):0},s=e=>{e.dispatchEvent(new Event(t))},n=t=>!(!t||"object"!=typeof t)&&(void 0!==t.jquery&&(t=t[0]),void 0!==t.nodeType),o=t=>n(t)?t.jquery?t[0]:t:"string"==typeof t&&t.length>0?document.querySelector(t):null,r=new Map;var a={set(t,e,i){r.has(t)||r.set(t,new Map);const s=r.get(t);s.has(e)||0===s.size?s.set(e,i):console.error(`Bootstrap doesn't allow more than one instance per element. Bound instance: ${Array.from(s.keys())[0]}.`)},get:(t,e)=>r.has(t)?r.get(t).get(e)||null:null,remove(t,e){if(!r.has(t))return;const i=r.get(t);i.delete(e),0===i.size&&r.delete(t)}};const l=e=>"true"===e||"false"!==e&&(e===Number(e).toString()?Number(e):""===e||"null"===e?null:e),c=t=>t.replace(/[A-Z]/g,(t=>`-${t.toLowerCase()}`)),h={setDataAttribute(t,e,i){t.setAttribute(`data-bs-${c(e)}`,i)},removeDataAttribute(t,e){t.removeAttribute(`data-bs-${c(e)}`)},getDataAttributes(t){if(!t)return{};const e={};return Object.keys(t.dataset).filter((t=>t.startsWith("bs"))).forEach((s=>{let n=s.replace(/^bs/,"");n=n.charAt(0).toLowerCase()+n.slice(1,n.length),e[n]=l(t.dataset[s])})),e},getDataAttribute:(t,e)=>l(t.getAttribute(`data-bs-${c(e)}`)),removeDataAttribute(t,e){h.removeDataAttribute(t,c(e))}};class d{constructor(t){t&&(this._element=t,a.set(this._element,this.constructor.DATA_KEY,this))}dispose(){a.remove(this._element,this.constructor.DATA_KEY),this._element=null}static get instances(){return Array.from(a.values(),(t=>t.instance))}static getInstance(t){return a.get(o(t),"instance")}static getOrCreateInstance(t,e={}){return this.getInstance(t)||new this(t,"object"==typeof e?e:null)}static get NAME(){throw new Error('You have to implement the static method "NAME"!')}static get DATA_KEY(){return`bs.${this.NAME}`}static get EVENT_KEY(){return`.${this.DATA_KEY}`}}class u extends d{static get NAME(){return"alert"}close(){if(this._element.classList.contains("fade"))return;const t=this._element.closest(".alert");this._element.remove();const e=new CustomEvent("closed.bs.alert",{bubbles:!0});t&&t.dispatchEvent(e)}static jQueryInterface(t){return this.each((function(){const e=u.getOrCreateInstance(this);"string"==typeof t&&(e[t]?e[t]():console.warn(`No method named "${t}" on ${this.NAME}`))}))}}class p extends d{static get NAME(){return"button"}toggle(){this._element.classList.toggle("active")}static jQueryInterface(t){return this.each((function(){const e=p.getOrCreateInstance(this);"string"==typeof t&&e[t]()}))}}const f={find:(t,e=document.documentElement)=>[].concat(...Element.prototype.querySelectorAll.call(e,t)),findOne:(t,e=document.documentElement)=>Element.prototype.querySelector.call(e,t),children:(t,e)=>[].concat(...t.children).filter((t=>t.matches(e))),parents(t,e){const i=[];let s=t.parentNode;for(;s&&s.nodeType===Node.ELEMENT_NODE&&3!==s.nodeType;)s.matches(e)&&i.push(s),s=s.parentNode;return i},prev(t,e){let i=t.previousElementSibling;for(;i;){if(i.matches(e))return[i];i=i.previousElementSibling}return[]},next(t,e){let i=t.nextElementSibling;for(;i;){if(i.matches(e))return[i];i=i.nextElementSibling}return[]},focusableChildren:t=>f.find("a, button, input, textarea, select, details, [tabindex], [contenteditable='true']",t).filter((t=>!t.hasAttribute("disabled")&&"hidden"!==t.getAttribute("aria-hidden")))};const m="carousel",g={interval:5e3,keyboard:!0,slide:!1,pause:"hover",wrap:!0,touch:!0},_={TOUCH:"touch",PEN:"pen"};class b extends d{constructor(t,e){super(t),this._items=null,this._interval=null,this._activeElement=null,this._isPaused=!1,this._isSliding=!1,this.touchTimeout=null,this.touchStartX=0,this.touchDeltaX=0,this._config=this._getConfig(e),this._indicatorsElement=f.findOne(".carousel-indicators",this._element),this._touchSupported="ontouchstart"in document.documentElement||navigator.maxTouchPoints>0,this._pointerEvent=Boolean(window.PointerEvent),this._addEventListeners()}static get Default(){return g}static get NAME(){return m}next(){this._slide("next")}nextWhenVisible(){!document.hidden&&this._element.offsetParent&&this.next()}prev(){this._slide("prev")}pause(t){t||(this._isPaused=!0),f.findOne(".carousel-item-next, .carousel-item-prev",this._element)||(clearInterval(this._interval),this._interval=null)}cycle(t){t||(this._isPaused=!1),this._interval&&(clearInterval(this._interval),this._interval=null),this._config&&this._config.interval&&!this._isPaused&&(this._updateInterval(),this._interval=setInterval((document.visibilityState?this.nextWhenVisible:this.next).bind(this),this._config.interval))}to(t){this._activeElement=f.findOne(".active.carousel-item",this._element);const e=this._getItems();if(t>e.length-1||t<0)return;if(this._isSliding)return;const i=e.indexOf(this._activeElement);if(i===t)return this.pause(),void this.cycle();const s=t>i?"next":"prev";this._slide(s,e[t])}_getConfig(t){return t={...g,...h.getDataAttributes(this._element),..."object"==typeof t?t:{}},t}_handleSwipe(){const t=Math.abs(this.touchDeltaX);if(t<=40)return;const e=t/this.touchDeltaX;this.touchDeltaX=0,e&&this._slide(e>0?"prev":"next")}_addEventListeners(){this._config.keyboard&&this._element.addEventListener("keydown",(t=>{if(/ArrowLeft|ArrowRight/.test(t.key)){t.preventDefault();const e="ArrowLeft"===t.key?"prev":"next";this._slide(e)}})),"hover"===this._config.pause&&(this._element.addEventListener("mouseenter",(()=>{this.pause()})),this._element.addEventListener("mouseleave",(()=>{this.cycle()}))),this._config.touch&&this._touchSupported&&this._addTouchEventListeners()}_addTouchEventListeners(){const t=t=>{this._pointerEvent&&("pen"===t.pointerType||"touch"===t.pointerType)?this.touchStartX=t.clientX:this._pointerEvent||(this.touchStartX=t.touches[0].clientX)},e=e=>{this.touchDeltaX=e.touches&&e.touches.length>1?0:e.touches[0].clientX-this.touchStartX},i=t=>{this._pointerEvent&&("pen"===t.pointerType||"touch"===t.pointerType)&&(this.touchDeltaX=t.clientX-this.touchStartX),this._handleSwipe(),"hover"===this._config.pause&&(this.pause(),this.touchTimeout&&clearTimeout(this.touchTimeout),this.touchTimeout=setTimeout((()=>{this.cycle()}),500+this._config.interval))};f.find(".carousel-item img",this._element).forEach((t=>{t.addEventListener("dragstart",(t=>t.preventDefault()))})),this._pointerEvent?(this._element.addEventListener("pointerdown",t),this._element.addEventListener("pointerup",i),this._element.setAttribute("style","touch-action: pan-y")):(this._element.addEventListener("touchstart",t),this._element.addEventListener("touchmove",e),this._element.addEventListener("touchend",i))}_getItems(){return this._items=f.find(".carousel-item",this._element),this._items}_slide(t,i){const s=this._directionToOrder(t),n=this._getItems(),o=this._orderToDirection(s),r=n.indexOf(this._activeElement),a=i||n[this._getNextItemIndex(r,s)],l=n.indexOf(a),c=Boolean(this._interval);if(a&&a.classList.contains("active"))return void(this._isSliding=!1);if(this._isSliding)return;this._isSliding=!0,c&&this.pause();const h=new CustomEvent("slide.bs.carousel",{bubbles:!1,cancelable:!0,from:r,to:l,direction:o});this._element.dispatchEvent(h),h.defaultPrevented||(this._activeElement.classList.remove("active"),a.classList.add("active"),this._activeElement.classList.add(`carousel-item-${o}`),a.classList.add(`carousel-item-${s}`),this._queueCallback((()=>{a.classList.remove(`carousel-item-${s}`),a.classList.add("active"),this._activeElement.classList.remove("active",`carousel-item-${o}`),this._isSliding=!1,setTimeout((()=>{this._element.dispatchEvent(new CustomEvent("slid.bs.carousel",{bubbles:!1,cancelable:!0,from:r,to:l,direction:o}))}),0)}),this._activeElement,!0),c&&this.cycle())}_getNextItemIndex(t,e){return(t+(e?1:-1)+(e?0:this._getItems().length))%this._getItems().length}_directionToOrder(t){return[t,"next"].includes(t)?"next":"prev"}_orderToDirection(t){return[t,"next"].includes(t)?"right":"left"}_updateInterval(){const t=this._activeElement||f.findOne(".active.carousel-item",this._element);if(!t)return;const e=Number.parseInt(t.getAttribute("data-bs-interval"),10);e?(this._config.interval=e,this.pause(),this.cycle()):this._config.interval=g.interval}}class v extends d{static get NAME(){return"collapse"}toggle(){this._element.classList.toggle("show")}static jQueryInterface(t){return this.each((function(){const e={...h.getDataAttributes(this),..."object"==typeof t&&t?t:{}};if("string"==typeof t&&/show|hide/.test(t))return;const i=v.getOrCreateInstance(this,e);i.toggle()}))}}class y extends d{static get NAME(){return"dropdown"}toggle(){d.instances.forEach((t=>t.hide())),this._element.classList.toggle("show")}hide(){this._element.classList.remove("show")}static jQueryInterface(t){return this.each((function(){const e=y.getOrCreateInstance(this);if("string"==typeof t){if(void 0===e[t])throw new TypeError(`No method named "${t}"`);e[t]()}}))}}class w extends d{constructor(t,e){super(t,e),this._isShown=!1}static get NAME(){return"modal"}toggle(t){return this._isShown?this.hide():this.show(t)}show(t){this._isShown||(this._isShown=!0,this._element.style.display="block",this._element.removeAttribute("aria-hidden"),this._element.setAttribute("aria-modal",!0),this._element.setAttribute("role","dialog"),this._element.scrollTop=0,f.findOne(".modal-body",this._element)&&(f.findOne(".modal-body",this._element).scrollTop=0),this._element.classList.add("show"),this._queueCallback((()=>{this._element.focus(),this._element.dispatchEvent(new CustomEvent("shown.bs.modal",{relatedTarget:t}))}),this._element,!0))}hide(){this._isShown&&(this._isShown=!1,this._element.style.display="none",this._element.setAttribute("aria-hidden",!0),this._element.removeAttribute("aria-modal"),this._element.removeAttribute("role"),this._element.classList.remove("show"),this._element.dispatchEvent(new CustomEvent("hidden.bs.modal")))}dispose(){[window,this._dialog].forEach((t=>t.removeEventListener("keydown",this._keydownHandler))),super.dispose()}_queueCallback(t,e,s=!0){if(!s)return void t();const n=i(e);setTimeout(t,n)}}class A extends d{static get NAME(){return"offcanvas"}show(){this._element.classList.add("show")}hide(){this._element.classList.remove("show")}static jQueryInterface(t){return this.each((function(){const e=A.getOrCreateInstance(this);"string"==typeof t?e[t]():e.show()}))}}class E extends d{static get NAME(){return"popover"}static get Default(){return{...super.Default,placement:"right",trigger:"click",content:""}}static jQueryInterface(t){return this.each((function(){const e=E.getOrCreateInstance(this);"string"==typeof t?e[t]():e.show()}))}}class T extends d{static get NAME(){return"scrollspy"}refresh(){this._process(),this._activate(this._scrollElement.scrollTop)}static jQueryInterface(t){return this.each((function(){const e=T.getOrCreateInstance(this);"string"==typeof t?e[t]():e.refresh()}))}}_process(){this._targets.forEach(((t,e)=>{this._offsets[e]=t.offsetTop,this._targets[e]=t.id}))}_activate(t){this._activeTarget=null;let e=!1;for(let i=this._offsets.length-1;i>=0;i--)this._offsets[i]<=t&&(this._activeTarget=this._targets[i],e=!0);e||(this._activeTarget=this._targets[0]),this._clear(),this._setActive(this._activeTarget)}_clear(){this._targets.forEach((t=>document.querySelector(`[data-bs-target="#${t}"]`).classList.remove("active")))}_setActive(t){const e=document.querySelector(`[data-bs-target="#${t}"]`);e&&e.classList.add("active")}}class C extends d{static get NAME(){return"tab"}show(){const t=this._element;if(t.parentNode&&t.parentNode.nodeType===Node.ELEMENT_NODE&&t.classList.contains("active"))return;const e=(t=>{let e=t.getAttribute("data-bs-target");if(!e||"#"===e){let i=t.getAttribute("href");e=i&&"#"!==i?i.trim():null}return e?document.querySelector(e):null})(t),i=t.closest(".nav, .list-group");if(i){const e=i.querySelector(".active");e&&e!==t&&e.classList.remove("active")}t.classList.add("active"),e.classList.add("show")
-}static jQueryInterface(t){return this.each((function(){const e=C.getOrCreateInstance(this);"string"==typeof t?e[t]():e.show()}))}}class S extends d{static get NAME(){return"toast"}show(){this._element.classList.add("showing"),setTimeout((()=>{this._element.classList.remove("showing"),this._element.classList.add("show")}),150)}hide(){this._element.classList.remove("show")}}return{Alert:u,Button:p,Carousel:b,Collapse:v,Dropdown:y,Modal:w,Offcanvas:A,Popover:E,ScrollSpy:T,Tab:C,Toast:S}}));
+        // CORRECTED: Full Bootstrap v5.3.2 JS
+        !function(t,e){"object"==typeof exports&&"undefined"!=typeof module?module.exports=e():"function"==typeof define&&define.amd?define(e):(t="undefined"!=typeof globalThis?globalThis:t||self).bootstrap=e()}(this,(function(){"use strict";const t=new Map,e={set(e,i,s){t.has(e)||t.set(e,new Map);const n=t.get(e);n.has(i)||0===n.size?n.set(i,s):console.error(`Bootstrap doesn't allow more than one instance per element. Bound instance: ${Array.from(n.keys())[0]}.`)},get:(e,i)=>t.has(e)?t.get(e).get(i)||null:null,remove(e,i){if(!t.has(e))return;const s=t.get(e);s.delete(i),0===s.size&&t.delete(e)}};const i="transitionend",s=t=>(t&&window.getComputedStyle(t).transitionDuration,t);const n=t=>{if(!t)return 0;let{transitionDuration:e,transitionDelay:i}=window.getComputedStyle(t);const s=Number.parseFloat(e),n=Number.parseFloat(i);return s||n?(e=e.split(",")[0],i=i.split(",")[0],1e3*(Number.parseFloat(e)+Number.parseFloat(i))):0},o=t=>{t.dispatchEvent(new Event(i))},r=t=>!(!t||"object"!=typeof t)&&(void 0!==t.jquery&&(t=t[0]),void 0!==t.nodeType),a=t=>r(t)?t.jquery?t[0]:t:"string"==typeof t&&t.length>0?document.querySelector(t):null;const l={};letc=1;const h={set(t,e,i){void 0===t.bsKey&&(t.bsKey=c++,l[t.bsKey]={}),l[t.bsKey][e]=i},get:(t,e)=>l[t.bsKey]?l[t.bsKey][e]:void 0,delete(t,e){if(void 0===t.bsKey)return;const i=l[t.bsKey];delete i[e],0===Object.keys(i).length&&(delete l[t.bsKey],delete t.bsKey)}};class d{constructor(t){t&&(this._element=t,e.set(this._element,this.constructor.DATA_KEY,this))}dispose(){e.remove(this._element,this.constructor.DATA_KEY),this._element=null}static getOrCreateInstance(t,e={}){return this.getInstance(t)||new this(t,e)}static getInstance(t){return e.get(a(t),this.DATA_KEY)}static get NAME(){throw new Error('You have to implement the static method "NAME"!')}static get DATA_KEY(){return`bs.${this.NAME}`}static get EVENT_KEY(){return`.${this.DATA_KEY}`}}class u extends d{static get NAME(){return"modal"}constructor(t,i){super(t),this._config=this._getConfig(i),this._dialog=document.querySelector(".modal-dialog",this._element),this._backdrop=this._initializeBackDrop(),this._focustrap=this._initializeFocusTrap(),this._isShown=!1,this._ignoreBackdropClick=!1,this._isTransitioning=!1,this._didInit=!1}toggle(t){return this._isShown?this.hide():this.show(t)}show(t){this._isShown||this._isTransitioning||(this._isShown=!0,this._isTransitioning=!0,this._showBackdrop().then((()=>this._showElement(t))))}hide(){this._isShown&&!this._isTransitioning&&(this._isShown=!1,this._isTransitioning=!0,this._focustrap.deactivate(),this._element.classList.remove("show"),this._queueCallback((()=>this._hideElement()),this._element,!0).then((()=>this._hideBackdrop())))}dispose(){[window,this._dialog].forEach((t=>t.removeEventListener("keydown",this._keydownHandler))),this._focustrap.deactivate(),super.dispose()}update(){this._adjustDialog()}_initializeBackDrop(){return Object.assign(document.createElement("div"),{className:"modal-backdrop fade"})}_initializeFocusTrap(){return{activate:()=>{},deactivate:()=>{}}}_getConfig(t){return t=Object.assign({},this.constructor.Default,t),t}_showElement(t){const e=this._element;e.style.display="block",e.removeAttribute("aria-hidden"),e.setAttribute("aria-modal",!0),e.setAttribute("role","dialog"),e.scrollTop=0;const i=document.querySelector(".modal-body",this._dialog);i&&(i.scrollTop=0),this._adjustDialog(),this._focustrap.activate(),this._element.classList.add("show"),this._queueCallback((()=>{this._element.focus(),this._isTransitioning=!1,this.constructor.trigger(this._element,"shown.bs.modal",{relatedTarget:t})}),this._element,!0)}_hideElement(){const t=this._element;t.style.display="none",t.setAttribute("aria-hidden",!0),t.removeAttribute("aria-modal"),t.removeAttribute("role"),this._isTransitioning=!1,this.constructor.trigger(this._element,"hidden.bs.modal")}_showBackdrop(){return new Promise((t=>{this._backdrop.className="modal-backdrop fade",document.body.appendChild(this._backdrop),this._queueCallback((()=>{this._backdrop.classList.add("show"),t()}),this._backdrop,!0)}))}_hideBackdrop(){return new Promise((t=>{this._backdrop.classList.remove("show"),this._queueCallback((()=>{this._backdrop.remove(),t()}),this._backdrop,!0)}))}_adjustDialog(){const t=this._element.scrollHeight>document.documentElement.clientHeight;(!this._isBodyOverflowing&&t&&"rtl"!==document.documentElement.dir||this._isBodyOverflowing&&!t&&"rtl"!==document.documentElement.dir)&&(this._element.style.paddingLeft=this._scrollbarWidth+"px"),(!this._isBodyOverflowing&&t&&"rtl"===document.documentElement.dir||this._isBodyOverflowing&&!t&&"rtl"===document.documentElement.dir)&&(this._element.style.paddingRight=this._scrollbarWidth+"px")}}return u}()));
     </script>
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // --- Configuration and State ---
-        const API_BASE_URL = 'http://localhost:5000/api';
-        let currentUser = null;
-        let config = null;
-        let createUserModal, editUserModal, resetPasswordResultModal, createUserResultModal;
-
-        // --- UI Element Cache ---
-        const screens = {
-            login: document.getElementById('login-page'),
-            error: document.getElementById('error-screen'),
-            main: document.getElementById('main-app'),
-            loading: document.getElementById('loading-spinner')
-        };
-        const alertPlaceholder = document.getElementById('alert-placeholder');
-        
-        // --- UI Functions ---
-        const showScreen = (screenName) => {
-            const mainApp = document.getElementById('main-app');
-            Object.values(screens).forEach(s => s.style.display = 'none');
-            if (screenName === 'main') {
-                mainApp.style.display = 'flex'; // Use flex for main app
-            } else {
-                screens[screenName].style.display = 'flex';
-            }
-        };
-
-        const showLoading = (show) => { screens.loading.style.display = show ? 'flex' : 'none'; };
-        
-        const showAlert = (message, type = 'danger') => {
-            const wrapper = document.createElement('div');
-            wrapper.innerHTML = [
-                `<div class="alert alert-${type} alert-dismissible fade show" role="alert">`,
-                `   <div>${message}</div>`,
-                '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-                '</div>'
-            ].join('');
-            alertPlaceholder.innerHTML = ''; // Clear previous alerts
-            alertPlaceholder.append(wrapper);
-        };
-
-        const toISODateString = (date) => date.toISOString().split('T')[0];
-
-        const formatDateForInput = (dateString) => {
-            if (!dateString) return '';
-            return toISODateString(new Date(dateString));
-        };
-
-        const formatDisplayDate = (dateString) => {
-            if (!dateString) return 'Never';
-            return new Date(dateString).toLocaleDateString();
-        };
-
-        // --- API Communication ---
-        const apiFetch = async (url, options = {}) => {
-            showLoading(true);
-            try {
-                const mergedOptions = { ...options, headers: { 'Content-Type': 'application/json', ...options.headers, }, credentials: 'include' };
-                if (mergedOptions.body && typeof mergedOptions.body !== 'string') {
-                    mergedOptions.body = JSON.stringify(mergedOptions.body);
+        // Application JavaScript (unchanged)
+        document.addEventListener('DOMContentLoaded', () => {
+            const API_BASE_URL = 'http://localhost:5000/api';
+            let currentUser = null;
+            let config = null;
+            let createUserModal, editUserModal, resetPasswordResultModal, createUserResultModal;
+            const screens = {
+                login: document.getElementById('login-page'),
+                error: document.getElementById('error-screen'),
+                main: document.getElementById('main-app'),
+                loading: document.getElementById('loading-spinner')
+            };
+            const alertPlaceholder = document.getElementById('alert-placeholder');
+            const showScreen = (screenName) => {
+                const mainApp = document.getElementById('main-app');
+                Object.values(screens).forEach(s => s.style.display = 'none');
+                if (screenName === 'main') {
+                    mainApp.style.display = 'flex';
+                } else {
+                    screens[screenName].style.display = 'flex';
                 }
-                const response = await fetch(url, mergedOptions);
-                if (!response.ok) {
-                    let errorData;
-                    try { errorData = await response.json(); }
-                    catch (e) { errorData = { message: `HTTP error! status: ${response.status}`, detail: await response.text() || 'Server returned an unexpected response.' }; }
-                    if (response.status === 401) errorData.detail = "Authentication failed. Check browser settings for Integrated Windows Authentication.";
-                    throw errorData;
+            };
+            const showLoading = (show) => { screens.loading.style.display = show ? 'flex' : 'none'; };
+            const showAlert = (message, type = 'danger') => {
+                const wrapper = document.createElement('div');
+                wrapper.innerHTML = [
+                    `<div class="alert alert-${type} alert-dismissible fade show" role="alert">`,
+                    `   <div>${message}</div>`,
+                    '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                    '</div>'
+                ].join('');
+                alertPlaceholder.innerHTML = '';
+                alertPlaceholder.append(wrapper);
+            };
+            const toISODateString = (date) => date.toISOString().split('T')[0];
+            const formatDateForInput = (dateString) => {
+                if (!dateString) return '';
+                return toISODateString(new Date(dateString));
+            };
+            const formatDisplayDate = (dateString) => {
+                if (!dateString) return 'Never';
+                return new Date(dateString).toLocaleDateString();
+            };
+            const apiFetch = async (url, options = {}) => {
+                showLoading(true);
+                try {
+                    const mergedOptions = { ...options, headers: { 'Content-Type': 'application/json', ...options.headers, }, credentials: 'include' };
+                    if (mergedOptions.body && typeof mergedOptions.body !== 'string') {
+                        mergedOptions.body = JSON.stringify(mergedOptions.body);
+                    }
+                    const response = await fetch(url, mergedOptions);
+                    if (!response.ok) {
+                        let errorData;
+                        try { errorData = await response.json(); }
+                        catch (e) { errorData = { message: `HTTP error! status: ${response.status}`, detail: await response.text() || 'Server returned an unexpected response.' }; }
+                        if (response.status === 401) errorData.detail = "Authentication failed. Check browser settings for Integrated Windows Authentication.";
+                        throw errorData;
+                    }
+                    if (response.status === 204) return null;
+                    return response.json();
+                } finally {
+                    showLoading(false);
                 }
-                if (response.status === 204) return null;
-                return response.json();
-            } finally {
-                showLoading(false);
-            }
-        };
-
-        // --- Core Application Logic and Event Handlers ---
-        const checkApiHealth = async () => {
-            try {
-                await fetch(`${API_BASE_URL}/healthcheck`);
-                return true;
-            } catch (error) {
-                return false;
-            }
-        };
-
-        const initializeApp = async () => {
-            if (!await checkApiHealth()) {
-                document.getElementById('error-title').textContent = 'Connection Error';
-                document.getElementById('error-details').textContent = "API Service is not available. Please contact your Administrator.";
-                showScreen('error');
-                return;
-            }
-            try {
-                currentUser = await apiFetch(`${API_BASE_URL}/auth/me`);
-                config = await apiFetch(`${API_BASE_URL}/config/settings`);
-                
-                document.getElementById('user-name').textContent = currentUser.name;
-                const domainSelect = document.getElementById('domain-select');
-                const createDomainSelect = document.getElementById('create-domain');
-                domainSelect.innerHTML = createDomainSelect.innerHTML = '';
-                config.domains.forEach(d => {
-                    domainSelect.add(new Option(d, d));
-                    createDomainSelect.add(new Option(d, d));
-                });
-                
-                const createUserBtn = document.getElementById('create-user-show-modal-btn');
-                createUserBtn.disabled = !currentUser.isHighPrivilege;
-                createUserBtn.title = currentUser.isHighPrivilege ? 'Create a new domain user' : 'You do not have permission to create users.';
-                
-                showScreen('main');
-            } catch (error) {
-                document.getElementById('error-title').textContent = 'Access Denied';
-                document.getElementById('error-details').textContent = error.detail || error.message || 'You are not authorized to access this portal.';
-                showScreen('error');
-            }
-        };
-
-        const handleSearch = async () => {
-            const domain = document.getElementById('domain-select').value;
-            const nameFilter = document.getElementById('name-filter').value;
-            const statusFilter = document.getElementById('status-filter').value;
-            const adminFilter = document.getElementById('admin-filter').value;
-            const tableBody = document.getElementById('user-table-body');
-            tableBody.innerHTML = '<tr><td colspan="7" class="text-center">Searching...</td></tr>';
-
-            const params = new URLSearchParams({ domain });
-            if(nameFilter) params.append('nameFilter', nameFilter);
-            if(statusFilter) params.append('statusFilter', statusFilter);
-            if(adminFilter) params.append('hasAdminAccount', adminFilter);
-
-            try {
-                const users = await apiFetch(`${API_BASE_URL}/users/list?${params.toString()}`);
-                if (!users || users.length === 0) {
-                    tableBody.innerHTML = '<tr><td colspan="7" class="text-center">No users found.</td></tr>';
+            };
+            const checkApiHealth = async () => {
+                try {
+                    await fetch(`${API_BASE_URL}/healthcheck`);
+                    return true;
+                } catch (error) {
+                    return false;
+                }
+            };
+            const initializeApp = async () => {
+                if (!await checkApiHealth()) {
+                    document.getElementById('error-title').textContent = 'Connection Error';
+                    document.getElementById('error-details').textContent = "API Service is not available. Please contact your Administrator.";
+                    showScreen('error');
                     return;
                 }
-                
-                tableBody.innerHTML = users.map(user => `
-                    <tr>
-                        <td>${user.displayName || ''}</td>
-                        <td>${user.samAccountName || ''}</td>
-                        <td>${user.emailAddress || 'N/A'}</td>
-                        <td>${user.enabled ? '<span class="badge text-success-emphasis bg-success-subtle border border-success-subtle rounded-pill">Enabled</span>' : '<span class="badge text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-pill">Disabled</span>'}</td>
-                        <td>${user.hasAdminAccount ? '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill text-success" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>' : ''}</td>
-                        <td>${formatDisplayDate(user.accountExpirationDate)}</td>
-                        <td class="action-btn-group">
-                            <button class="btn btn-sm btn-secondary" title="Edit User" data-action="edit" data-sam="${user.samAccountName}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/></svg></button>
-                            <button class="btn btn-sm btn-warning" title="Reset Password" data-action="reset-pw" data-sam="${user.samAccountName}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-key-fill" viewBox="0 0 16 16"><path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2zM2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/></svg></button>
-                            <button class="btn btn-sm btn-info" title="Unlock Account" data-action="unlock" data-sam="${user.samAccountName}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-unlock-fill" viewBox="0 0 16 16"><path d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2"/></svg></button>
-                            <button class="btn btn-sm btn-danger" title="Disable Account" data-action="disable" data-sam="${user.samAccountName}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-slash" viewBox="0 0 16 16"><path d="M13.879 10.414a2.502 2.502 0 0 0-3.465-3.465l3.465 3.465Zm.707.707-3.465-3.465a2.502 2.502 0 0 0-3.465 3.465l3.465-3.465Zm-4.56-4.56a2.5 2.5 0 1 0 0-3.535 2.5 2.5 0 0 0 0 3.535M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0m-2.293 7.293a1 1 0 0 1-1.414 0l-1.414-1.414a1 1 0 1 1 1.414-1.414l1.414 1.414a1 1 0 0 1 0 1.414m2.828-2.828a1 1 0 0 1-1.414-1.414l-1.414 1.414a1 1 0 1 1-1.414-1.414l1.414-1.414a1 1 0 1 1 1.414 1.414l-1.414 1.414a1 1 0 0 1 1.414 1.414l-3.535-3.535a1 1 0 0 1 1.414-1.414zM4.5 0A3.5 3.5 0 0 1 8 3.5v1.096a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V3.5A3.5 3.5 0 0 1 4.5 0"/></svg></button>
+                try {
+                    currentUser = await apiFetch(`${API_BASE_URL}/auth/me`);
+                    config = await apiFetch(`${API_BASE_URL}/config/settings`);
+                    document.getElementById('user-name').textContent = currentUser.name;
+                    const domainSelect = document.getElementById('domain-select');
+                    const createDomainSelect = document.getElementById('create-domain');
+                    domainSelect.innerHTML = createDomainSelect.innerHTML = '';
+                    config.domains.forEach(d => {
+                        domainSelect.add(new Option(d, d));
+                        createDomainSelect.add(new Option(d, d));
+                    });
+                    const createUserBtn = document.getElementById('create-user-show-modal-btn');
+                    createUserBtn.disabled = !currentUser.isHighPrivilege;
+                    createUserBtn.title = currentUser.isHighPrivilege ? 'Create a new domain user' : 'You do not have permission to create users.';
+                    showScreen('main');
+                } catch (error) {
+                    document.getElementById('error-title').textContent = 'Access Denied';
+                    document.getElementById('error-details').textContent = error.detail || error.message || 'You are not authorized to access this portal.';
+                    showScreen('error');
+                }
+            };
+            const handleSearch = async () => {
+                const domain = document.getElementById('domain-select').value;
+                const nameFilter = document.getElementById('name-filter').value;
+                const statusFilter = document.getElementById('status-filter').value;
+                const adminFilter = document.getElementById('admin-filter').value;
+                const tableBody = document.getElementById('user-table-body');
+                tableBody.innerHTML = '<tr><td colspan="7" class="text-center">Searching...</td></tr>';
+                const params = new URLSearchParams({ domain });
+                if(nameFilter) params.append('nameFilter', nameFilter);
+                if(statusFilter) params.append('statusFilter', statusFilter);
+                if(adminFilter) params.append('hasAdminAccount', adminFilter);
+                try {
+                    const users = await apiFetch(`${API_BASE_URL}/users/list?${params.toString()}`);
+                    if (!users || users.length === 0) {
+                        tableBody.innerHTML = '<tr><td colspan="7" class="text-center">No users found.</td></tr>';
+                        return;
+                    }
+                    tableBody.innerHTML = users.map(user => `
+                        <tr>
+                            <td>${user.displayName || ''}</td>
+                            <td>${user.samAccountName || ''}</td>
+                            <td>${user.emailAddress || 'N/A'}</td>
+                            <td>${user.enabled ? '<span class="badge text-success-emphasis bg-success-subtle border border-success-subtle rounded-pill">Enabled</span>' : '<span class="badge text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-pill">Disabled</span>'}</td>
+                            <td>${user.hasAdminAccount ? '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill text-success" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>' : ''}</td>
+                            <td>${formatDisplayDate(user.accountExpirationDate)}</td>
+                            <td class="action-btn-group">
+                                <button class="btn btn-sm btn-secondary" title="Edit User" data-action="edit" data-sam="${user.samAccountName}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/></svg></button>
+                                <button class="btn btn-sm btn-warning" title="Reset Password" data-action="reset-pw" data-sam="${user.samAccountName}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-key-fill" viewBox="0 0 16 16"><path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2zM2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/></svg></button>
+                                <button class="btn btn-sm btn-info" title="Unlock Account" data-action="unlock" data-sam="${user.samAccountName}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-unlock-fill" viewBox="0 0 16 16"><path d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2"/></svg></button>
+                                <button class="btn btn-sm btn-danger" title="Disable Account" data-action="disable" data-sam="${user.samAccountName}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-slash" viewBox="0 0 16 16"><path d="M13.879 10.414a2.502 2.502 0 0 0-3.465-3.465l3.465 3.465Zm.707.707-3.465-3.465a2.502 2.502 0 0 0-3.465 3.465l3.465-3.465Zm-4.56-4.56a2.5 2.5 0 1 0 0-3.535 2.5 2.5 0 0 0 0 3.535M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0m-2.293 7.293a1 1 0 0 1-1.414 0l-1.414-1.414a1 1 0 1 1 1.414-1.414l1.414 1.414a1 1 0 0 1 0 1.414m2.828-2.828a1 1 0 0 1-1.414-1.414l-1.414 1.414a1 1 0 1 1-1.414-1.414l1.414-1.414a1 1 0 1 1 1.414 1.414l-1.414 1.414a1 1 0 0 1 1.414 1.414l-3.535-3.535a1 1 0 0 1 1.414-1.414zM4.5 0A3.5 3.5 0 0 1 8 3.5v1.096a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V3.5A3.5 3.5 0 0 1 4.5 0"/></svg></button>
                             </td>
                         </tr>
                     `).join('');
@@ -295,19 +275,15 @@
                     tableBody.innerHTML = `<tr><td colspan="7" class="text-center text-danger">Failed to load users: ${error.detail || error.message}</td></tr>`;
                 }
             };
-            
             const handleShowCreateModal = () => {
                 document.getElementById('create-user-form').reset();
-                
                 const expirationInput = document.getElementById('create-expiration');
                 const today = new Date();
                 const oneYearFromNow = new Date();
                 oneYearFromNow.setFullYear(today.getFullYear() + 1);
-                
                 expirationInput.min = toISODateString(today);
                 expirationInput.max = toISODateString(oneYearFromNow);
-                expirationInput.value = toISODateString(oneYearFromNow); // Default to one year
-
+                expirationInput.value = toISODateString(oneYearFromNow);
                 const groupsContainer = document.getElementById('create-optional-groups-container');
                 const adminContainer = document.getElementById('create-admin-container');
                 if (currentUser.isHighPrivilege) {
@@ -324,7 +300,6 @@
                     adminContainer.style.display = 'none';
                 }
             };
-
             const handleShowEditModal = async (sam, domain) => {
                 document.getElementById('edit-user-form').reset();
                 try {
@@ -332,7 +307,6 @@
                     document.getElementById('edit-displayname').value = userDetails.displayName;
                     document.getElementById('edit-samaccountname').value = userDetails.samAccountName;
                     document.getElementById('edit-domain').value = domain;
-                    
                     const expirationInput = document.getElementById('edit-expiration');
                     const today = new Date();
                     const oneYearFromNow = new Date();
@@ -340,8 +314,6 @@
                     expirationInput.min = toISODateString(today);
                     expirationInput.max = toISODateString(oneYearFromNow);
                     expirationInput.value = formatDateForInput(userDetails.accountExpirationDate) || toISODateString(oneYearFromNow);
-
-
                     const groupsContainer = document.getElementById('edit-optional-groups-container');
                     const adminContainer = document.getElementById('edit-admin-container');
                     if (currentUser.isHighPrivilege) {
@@ -363,7 +335,6 @@
                     showAlert(`Failed to load user details: ${error.detail || error.message}`);
                 }
             };
-
             const handleResetPassword = async (sam, domain) => {
                 if (!confirm(`Are you sure you want to reset the password for ${sam}? A new random password will be generated.`)) return;
                 try {
@@ -375,7 +346,6 @@
                     showAlert(`Failed to reset password: ${error.detail || error.message}`);
                 }
             };
-            
             const handleUnlock = async (sam, domain) => {
                  if (!confirm(`Are you sure you want to unlock the account for ${sam}?`)) return;
                 try {
@@ -386,7 +356,6 @@
                     showAlert(`Failed to unlock account: ${error.detail || error.message}`);
                 }
             };
-            
             const handleDisable = async (sam, domain) => {
                 if (!confirm(`Are you sure you want to DISABLE the account for ${sam}? This action cannot be undone through this portal.`)) return;
                 try {
@@ -397,7 +366,6 @@
                     showAlert(`Failed to disable account: ${error.detail || error.message}`);
                 }
             };
-
             const handleCreateSubmit = async (e) => {
                 e.preventDefault();
                 const form = e.target;
@@ -406,7 +374,6 @@
                     e.stopPropagation(); 
                     return; 
                 }
-                
                 const expirationDate = form.querySelector('#create-expiration').value;
                 const optionalGroups = Array.from(form.querySelectorAll('#create-optional-groups-list input:checked')).map(cb => cb.value);
                 const data = {
@@ -418,11 +385,9 @@
                     createAdminAccount: form.querySelector('#create-admin-account').checked,
                     accountExpirationDate: expirationDate
                 };
-
                 try {
                     const result = await apiFetch(`${API_BASE_URL}/users/create`, { method: 'POST', body: data });
                     createUserModal.hide();
-                    
                     const resultBody = document.getElementById('create-user-result-body');
                     let resultHtml = `<h6>${result.message}</h6>`;
                     if (result.userAccount) {
@@ -442,7 +407,6 @@
                     showAlert(`Failed to create user: ${error.detail || error.message} ${validationErrors}`);
                 }
             };
-            
             const handleEditSubmit = async (e) => {
                 e.preventDefault();
                 const form = e.target;
@@ -460,7 +424,6 @@
                     manageAdminAccount: form.querySelector('#edit-admin-account').checked,
                     accountExpirationDate: expirationDate
                 };
-
                 try {
                     await apiFetch(`${API_BASE_URL}/users/update`, { method: 'PUT', body: data });
                     editUserModal.hide();
@@ -471,8 +434,6 @@
                     showAlert(`Failed to update user: ${error.detail || error.message} ${validationErrors}`);
                 }
             };
-
-            // --- Event Listeners and Initialization ---
             document.getElementById('login-btn').addEventListener('click', initializeApp);
             document.getElementById('logout-btn').addEventListener('click', () => showScreen('login'));
             document.getElementById('try-again-btn').addEventListener('click', () => showScreen('login'));
@@ -480,7 +441,6 @@
             document.getElementById('create-user-show-modal-btn').addEventListener('click', () => { handleShowCreateModal(); createUserModal.show(); });
             document.getElementById('create-user-form').addEventListener('submit', handleCreateSubmit);
             document.getElementById('edit-user-form').addEventListener('submit', handleEditSubmit);
-            
             document.getElementById('user-table-body').addEventListener('click', (e) => {
                 const button = e.target.closest('button[data-action]');
                 if (!button) return;
@@ -493,19 +453,16 @@
                     case 'disable': handleDisable(sam, domain); break;
                 }
             });
-
             document.getElementById('copy-password-btn').addEventListener('click', () => {
                 const passwordInput = document.getElementById('reset-pw-result-new');
                 passwordInput.select();
                 document.execCommand('copy');
                 showAlert('Password copied to clipboard!', 'success');
             });
-
             createUserModal = new bootstrap.Modal(document.getElementById('create-user-modal'));
             editUserModal = new bootstrap.Modal(document.getElementById('edit-user-modal'));
             resetPasswordResultModal = new bootstrap.Modal(document.getElementById('reset-password-result-modal'));
             createUserResultModal = new bootstrap.Modal(document.getElementById('create-user-result-modal'));
-            
             showScreen('login');
         });
     </script>
