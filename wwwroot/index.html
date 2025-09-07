@@ -4,22 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Active Directory Management Portal</title>
-    <style>
-        /* Embedded Bootstrap v5.3 for offline use */
-        :root,[data-bs-theme=light]{--bs-blue:#0d6efd;--bs-indigo:#6610f2;--bs-purple:#6f42c1;--bs-pink:#d63384;--bs-red:#dc3545;--bs-orange:#fd7e14;--bs-yellow:#ffc107;--bs-green:#198754;--bs-teal:#20c997;--bs-cyan:#0dcaf0;--bs-black:#000;--bs-white:#fff;--bs-gray:#6c757d;--bs-gray-dark:#343a40;--bs-gray-100:#f8f9fa;--bs-gray-200:#e9ecef;--bs-gray-300:#dee2e6;--bs-gray-400:#ced4da;--bs-gray-500:#adb5bd;--bs-gray-600:#6c757d;--bs-gray-700:#495057;--bs-gray-800:#343a40;--bs-gray-900:#212529;--bs-primary:#005A9E;--bs-secondary:#6c757d;--bs-success:#198754;--bs-info:#0dcaf0;--bs-warning:#ffc107;--bs-danger:#dc3545;--bs-light:#f8f9fa;--bs-dark:#212529;--bs-primary-rgb:0,90,158;--bs-secondary-rgb:108,117,125;--bs-success-rgb:25,135,84;--bs-info-rgb:13,202,40;--bs-warning-rgb:255,193,7;--bs-danger-rgb:220,53,69;--bs-light-rgb:248,249,250;--bs-dark-rgb:33,37,41;--bs-primary-text-emphasis:#052c65;--bs-secondary-text-emphasis:#2b2f32;--bs-success-text-emphasis:#0a3622;--bs-info-text-emphasis:#055160;--bs-warning-text-emphasis:#664d03;--bs-danger-text-emphasis:#58151c;--bs-light-text-emphasis:#495057;--bs-dark-text-emphasis:#495057;--bs-primary-bg-subtle:#cfe2ff;--bs-secondary-bg-subtle:#e2e3e5;--bs-success-bg-subtle:#d1e7dd;--bs-info-bg-subtle:#cff4fc;--bs-warning-bg-subtle:#fff3cd;--bs-danger-bg-subtle:#f8d7da;--bs-light-bg-subtle:#fcfcfd;--bs-dark-bg-subtle:#ced4da;--bs-primary-border-subtle:#9ec5fe;--bs-secondary-border-subtle:#c4c8cb;--bs-success-border-subtle:#a3cfbb;--bs-info-border-subtle:#9eeaf9;--bs-warning-border-subtle:#ffe69c;--bs-danger-border-subtle:#f1aeb5;--bs-light-border-subtle:#e9ecef;--bs-dark-border-subtle:#adb5bd;--bs-white-rgb:255,255,255;--bs-black-rgb:0,0,0;--bs-font-sans-serif:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";--bs-font-monospace:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;--bs-gradient:linear-gradient(180deg,rgba(255,255,255,.15),rgba(255,255,255,0));--bs-body-font-family:var(--bs-font-sans-serif);--bs-body-font-size:1rem;--bs-body-font-weight:400;--bs-body-line-height:1.5;--bs-body-color:#212529;--bs-body-bg:#f8f9fa;--bs-border-width:1px;--bs-border-style:solid;--bs-border-color:#dee2e6;--bs-border-color-translucent:rgba(0,0,0,.175);--bs-border-radius:.375rem;--bs-border-radius-sm:.25rem;--bs-border-radius-lg:.5rem;--bs-border-radius-xl:1rem;--bs-border-radius-xxl:2rem;--bs-border-radius-2xl:var(--bs-border-radius-xxl);--bs-border-radius-pill:50rem;--bs-link-color:#005A9E;--bs-link-hover-color:#00487d;--bs-code-color:#d63384;--bs-highlight-bg:#fff3cd}
-        html, body { height: 100%; }
-        body{display:flex; flex-direction:column; margin:0;font-family:var(--bs-body-font-family);font-size:var(--bs-body-font-size);font-weight:var(--bs-body-font-weight);line-height:var(--bs-body-line-height);color:var(--bs-body-color);text-align:var(--bs-body-text-align);background-color:var(--bs-body-bg);-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
-        .screen{display:none;align-items:center;justify-content:center;min-height:100vh}
-        #login-page{display:flex}
-        .login-box{width:100%;max-width:400px;padding:2.5rem;border:1px solid var(--bs-border-color);border-radius:var(--bs-border-radius-lg);background-color:var(--bs-body-bg)}
-        .btn-primary{--bs-btn-bg:#005A9E;--bs-btn-border-color:#005A9E;--bs-btn-hover-bg:#00487d;--bs-btn-hover-border-color:#00487d;--bs-btn-active-bg:#00487d;--bs-btn-active-border-color:#00487d}
-        .table-hover>tbody>tr:hover>*{--bs-table-accent-bg:rgba(0,0,0,0.04)}
-        .action-btn-group .btn{margin-right:0.25rem}
-        .result-table td{padding: .5rem .5rem; vertical-align: middle;}
-        #main-app { flex: 1 0 auto; display: flex; flex-direction: column;}
-        main { flex: 1 0 auto; }
-        .footer { flex-shrink: 0; }
-    </style>
+    <!-- Link to Bootstrap CSS from CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Link to your custom stylesheet -->
+    <link rel="stylesheet" href="css/site.css">
 </head>
 <body>
     <div id="loading-spinner" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 2000; display: flex; align-items: center; justify-content: center;">
@@ -101,12 +89,14 @@
         <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button><button type="submit" form="create-user-form" class="btn btn-primary">Create User</button></div>
     </div></div></div>
     
-    <!-- (Other modals are unchanged) -->
+    <!-- Create User Result Modal -->
     <div class="modal fade" id="create-user-result-modal" tabindex="-1" aria-labelledby="createUserResultModalLabel" aria-hidden="true"><div class="modal-dialog modal-lg"><div class="modal-content">
         <div class="modal-header"><h5 class="modal-title" id="createUserResultModalLabel">User Creation Successful</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
         <div class="modal-body" id="create-user-result-body"></div>
         <div class="modal-footer"><button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button></div>
     </div></div></div>
+
+    <!-- Edit User Modal -->
     <div class="modal fade" id="edit-user-modal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content">
         <div class="modal-header"><h5 class="modal-title" id="editUserModalLabel">Edit User</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
         <div class="modal-body"><form id="edit-user-form" novalidate>
@@ -118,6 +108,8 @@
         </form></div>
         <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button><button type="submit" form="edit-user-form" class="btn btn-primary">Save Changes</button></div>
     </div></div></div>
+
+    <!-- Password Reset Result Modal -->
     <div class="modal fade" id="reset-password-result-modal" tabindex="-1" aria-labelledby="resetPasswordResultModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content">
         <div class="modal-header"><h5 class="modal-title" id="resetPasswordResultModalLabel">Password Reset Successful</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
         <div class="modal-body">
@@ -132,351 +124,11 @@
         </div>
         <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div>
     </div></div></div>
-        
-    <script>
-        // CORRECTED: Full Bootstrap v5.3.2 JS
-        !function(t,e){"object"==typeof exports&&"undefined"!=typeof module?module.exports=e():"function"==typeof define&&define.amd?define(e):(t="undefined"!=typeof globalThis?globalThis:t||self).bootstrap=e()}(this,(function(){"use strict";const t=new Map,e={set(e,s,i){t.has(e)||t.set(e,new Map);const n=t.get(e);n.has(s)||0===n.size?n.set(s,i):console.error(`Bootstrap doesn't allow more than one instance per element. Bound instance: ${Array.from(n.keys())[0]}.`)},get:(t,e)=>t&&t.has(e)?t.get(e):null,remove(e,s){if(!t.has(e))return;const i=t.get(e);i.delete(s),0===i.size&&t.delete(e)}};const i="transitionend",s=t=>(t&&window.getComputedStyle(t).transitionDuration,t);const n=t=>{if(!t)return 0;let{transitionDuration:e,transitionDelay:i}=window.getComputedStyle(t);const s=Number.parseFloat(e),n=Number.parseFloat(i);return s||n?(e=e.split(",")[0],i=i.split(",")[0],1e3*(Number.parseFloat(e)+Number.parseFloat(i))):0},o=t=>{t.dispatchEvent(new Event(i))},r=t=>!(!t||"object"!=typeof t)&&(void 0!==t.jquery&&(t=t[0]),void 0!==t.nodeType),a=t=>r(t)?t.jquery?t[0]:t:"string"==typeof t&&t.length>0?document.querySelector(t):null;const l={};let c=1;const h={set(t,e,i){void 0===t.bsKey&&(t.bsKey=c++,l[t.bsKey]={}),l[t.bsKey][e]=i},get:(t,e)=>l[t.bsKey]?l[t.bsKey][e]:void 0,delete(t,e){if(void 0===t.bsKey)return;const i=l[t.bsKey];delete i[e],0===Object.keys(i).length&&(delete l[t.bsKey],delete t.bsKey)}};class d{constructor(t){t&&(this._element=t,e.set(this._element,this.constructor.DATA_KEY,this))}dispose(){e.remove(this._element,this.constructor.DATA_KEY),this._element=null}static getOrCreateInstance(t,e={}){return this.getInstance(t)||new this(t,e)}static getInstance(t){return e.get(a(t),this.DATA_KEY)}static get NAME(){throw new Error('You have to implement the static method "NAME"!')}static get DATA_KEY(){return`bs.${this.NAME}`}static get EVENT_KEY(){return`.${this.DATA_KEY}`}}class u extends d{static get NAME(){return"modal"}constructor(t,i){super(t),this._config=this._getConfig(i),this._dialog=a(".modal-dialog",this._element),this._backdrop=this._initializeBackDrop(),this._focustrap=this._initializeFocusTrap(),this._isShown=!1,this._ignoreBackdropClick=!1,this._isTransitioning=!1,this._didInit=!1}toggle(t){return this._isShown?this.hide():this.show(t)}show(t){this._isShown||this._isTransitioning||(this._isShown=!0,this._isTransitioning=!0,this._showBackdrop().then((()=>this._showElement(t))))}hide(){this._isShown&&!this._isTransitioning&&(this._isShown=!1,this._isTransitioning=!0,this._focustrap.deactivate(),this._element.classList.remove("show"),this._queueCallback((()=>this._hideElement()),this._element,!0).then((()=>this._hideBackdrop())))}dispose(){[window,this._dialog].forEach((t=>t.removeEventListener("keydown",this._keydownHandler))),this._focustrap.deactivate(),super.dispose()}update(){this._adjustDialog()}_initializeBackDrop(){return Object.assign(document.createElement("div"),{className:"modal-backdrop fade"})}_initializeFocusTrap(){return{activate:()=>{},deactivate:()=>{}}}_getConfig(t){const i=a(this._element);return t=Object.assign({},u.Default,h.getDataAttributes(i),"object"==typeof t?t:{}),t}_showElement(t){const e=this._element;e.style.display="block",e.removeAttribute("aria-hidden"),e.setAttribute("aria-modal",!0),e.setAttribute("role","dialog"),e.scrollTop=0;const i=a(".modal-body",this._dialog);i&&(i.scrollTop=0),this._adjustDialog(),this._focustrap.activate(),this._element.classList.add("show"),this._queueCallback((()=>{this._element.focus(),this._isTransitioning=!1,e.dispatchEvent(new CustomEvent("shown.bs.modal",{relatedTarget:t}))}),this._element,!0)}_hideElement(){const t=this._element;t.style.display="none",t.setAttribute("aria-hidden",!0),t.removeAttribute("aria-modal"),t.removeAttribute("role"),this._isTransitioning=!1,t.dispatchEvent(new CustomEvent("hidden.bs.modal"))}_showBackdrop(){return new Promise((t=>{this._backdrop.className="modal-backdrop fade",document.body.appendChild(this._backdrop),this._queueCallback((()=>{this._backdrop.classList.add("show"),t()}),this._backdrop,!0)}))}_hideBackdrop(){return new Promise((t=>{this._backdrop.classList.remove("show"),this._queueCallback((()=>{this._backdrop.remove(),t()}),this._backdrop,!0)}))}_adjustDialog(){const t=this._element.scrollHeight>document.documentElement.clientHeight;(!this._isBodyOverflowing&&t&&"rtl"!==document.documentElement.dir||this._isBodyOverflowing&&!t&&"rtl"!==document.documentElement.dir)&&(this._element.style.paddingLeft=this._scrollbarWidth+"px"),(!this._isBodyOverflowing&&t&&"rtl"===document.documentElement.dir||this._isBodyOverflowing&&!t&&"rtl"===document.documentElement.dir)&&(this._element.style.paddingRight=this._scrollbarWidth+"px")}}u.Default={backdrop:!0,keyboard:!0,focus:!0};return u}()));
-    </script>
-    <script>
-        // Application JavaScript (unchanged)
-        document.addEventListener('DOMContentLoaded', () => {
-            const API_BASE_URL = 'http://localhost:5000/api';
-            let currentUser = null;
-            let config = null;
-            let createUserModal, editUserModal, resetPasswordResultModal, createUserResultModal;
-            const screens = {
-                login: document.getElementById('login-page'),
-                error: document.getElementById('error-screen'),
-                main: document.getElementById('main-app'),
-                loading: document.getElementById('loading-spinner')
-            };
-            const alertPlaceholder = document.getElementById('alert-placeholder');
-            const showScreen = (screenName) => {
-                const mainApp = document.getElementById('main-app');
-                Object.values(screens).forEach(s => s.style.display = 'none');
-                if (screenName === 'main') {
-                    mainApp.style.display = 'flex';
-                } else {
-                    screens[screenName].style.display = 'flex';
-                }
-            };
-            const showLoading = (show) => { screens.loading.style.display = show ? 'flex' : 'none'; };
-            const showAlert = (message, type = 'danger') => {
-                const wrapper = document.createElement('div');
-                wrapper.innerHTML = [
-                    `<div class="alert alert-${type} alert-dismissible fade show" role="alert">`,
-                    `   <div>${message}</div>`,
-                    '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-                    '</div>'
-                ].join('');
-                alertPlaceholder.innerHTML = '';
-                alertPlaceholder.append(wrapper);
-            };
-            const toISODateString = (date) => date.toISOString().split('T')[0];
-            const formatDateForInput = (dateString) => {
-                if (!dateString) return '';
-                return toISODateString(new Date(dateString));
-            };
-            const formatDisplayDate = (dateString) => {
-                if (!dateString) return 'Never';
-                return new Date(dateString).toLocaleDateString();
-            };
-            const apiFetch = async (url, options = {}) => {
-                showLoading(true);
-                try {
-                    const mergedOptions = { ...options, headers: { 'Content-Type': 'application/json', ...options.headers, }, credentials: 'include' };
-                    if (mergedOptions.body && typeof mergedOptions.body !== 'string') {
-                        mergedOptions.body = JSON.stringify(mergedOptions.body);
-                    }
-                    const response = await fetch(url, mergedOptions);
-                    if (!response.ok) {
-                        let errorData;
-                        try { errorData = await response.json(); }
-                        catch (e) { errorData = { message: `HTTP error! status: ${response.status}`, detail: await response.text() || 'Server returned an unexpected response.' }; }
-                        if (response.status === 401) errorData.detail = "Authentication failed. Check browser settings for Integrated Windows Authentication.";
-                        throw errorData;
-                    }
-                    if (response.status === 204) return null;
-                    return response.json();
-                } finally {
-                    showLoading(false);
-                }
-            };
-            const checkApiHealth = async () => {
-                try {
-                    await fetch(`${API_BASE_URL}/healthcheck`);
-                    return true;
-                } catch (error) {
-                    return false;
-                }
-            };
-            const initializeApp = async () => {
-                console.log("Initializing app...");
-                if (!await checkApiHealth()) {
-                    document.getElementById('error-title').textContent = 'Connection Error';
-                    document.getElementById('error-details').textContent = "API Service is not available. Please contact your Administrator.";
-                    showScreen('error');
-                    return;
-                }
-                try {
-                    console.log("Fetching user context...");
-                    currentUser = await apiFetch(`${API_BASE_URL}/auth/me`);
-                    console.log("User context received:", currentUser);
-                    
-                    console.log("Fetching config settings...");
-                    config = await apiFetch(`${API_BASE_URL}/config/settings`);
-                    console.log("Config settings received:", config);
-                    
-                    document.getElementById('user-name').textContent = currentUser.name;
-                    const domainSelect = document.getElementById('domain-select');
-                    const createDomainSelect = document.getElementById('create-domain');
-                    domainSelect.innerHTML = createDomainSelect.innerHTML = '';
-                    config.domains.forEach(d => {
-                        domainSelect.add(new Option(d, d));
-                        createDomainSelect.add(new Option(d, d));
-                    });
-                    
-                    const createUserBtn = document.getElementById('create-user-show-modal-btn');
-                    createUserBtn.disabled = !currentUser.isHighPrivilege;
-                    createUserBtn.title = currentUser.isHighPrivilege ? 'Create a new domain user' : 'You do not have permission to create users.';
-                    
-                    console.log("Initialization complete. Showing main screen.");
-                    showScreen('main');
-                } catch (error) {
-                    console.error("Initialization failed:", error);
-                    document.getElementById('error-title').textContent = 'Access Denied';
-                    document.getElementById('error-details').textContent = error.detail || error.message || 'You are not authorized to access this portal.';
-                    showScreen('error');
-                }
-            };
-            const handleSearch = async () => {
-                const domain = document.getElementById('domain-select').value;
-                const nameFilter = document.getElementById('name-filter').value;
-                const statusFilter = document.getElementById('status-filter').value;
-                const adminFilter = document.getElementById('admin-filter').value;
-                const tableBody = document.getElementById('user-table-body');
-                tableBody.innerHTML = '<tr><td colspan="7" class="text-center">Searching...</td></tr>';
-                const params = new URLSearchParams({ domain });
-                if(nameFilter) params.append('nameFilter', nameFilter);
-                if(statusFilter) params.append('statusFilter', statusFilter);
-                if(adminFilter) params.append('hasAdminAccount', adminFilter);
-                try {
-                    const users = await apiFetch(`${API_BASE_URL}/users/list?${params.toString()}`);
-                    if (!users || users.length === 0) {
-                        tableBody.innerHTML = '<tr><td colspan="7" class="text-center">No users found.</td></tr>';
-                        return;
-                    }
-                    tableBody.innerHTML = users.map(user => `
-                        <tr>
-                            <td>${user.displayName || ''}</td>
-                            <td>${user.samAccountName || ''}</td>
-                            <td>${user.emailAddress || 'N/A'}</td>
-                            <td>${user.enabled ? '<span class="badge text-success-emphasis bg-success-subtle border border-success-subtle rounded-pill">Enabled</span>' : '<span class="badge text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-pill">Disabled</span>'}</td>
-                            <td>${user.hasAdminAccount ? '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill text-success" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>' : ''}</td>
-                            <td>${formatDisplayDate(user.accountExpirationDate)}</td>
-                            <td class="action-btn-group">
-                                <button class="btn btn-sm btn-secondary" title="Edit User" data-action="edit" data-sam="${user.samAccountName}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/></svg></button>
-                                <button class="btn btn-sm btn-warning" title="Reset Password" data-action="reset-pw" data-sam="${user.samAccountName}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-key-fill" viewBox="0 0 16 16"><path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2zM2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/></svg></button>
-                                <button class="btn btn-sm btn-info" title="Unlock Account" data-action="unlock" data-sam="${user.samAccountName}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-unlock-fill" viewBox="0 0 16 16"><path d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2"/></svg></button>
-                                <button class="btn btn-sm btn-danger" title="Disable Account" data-action="disable" data-sam="${user.samAccountName}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-slash" viewBox="0 0 16 16"><path d="M13.879 10.414a2.502 2.502 0 0 0-3.465-3.465l3.465 3.465Zm.707.707-3.465-3.465a2.502 2.502 0 0 0-3.465 3.465l3.465-3.465Zm-4.56-4.56a2.5 2.5 0 1 0 0-3.535 2.5 2.5 0 0 0 0 3.535M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0m-2.293 7.293a1 1 0 0 1-1.414 0l-1.414-1.414a1 1 0 1 1 1.414-1.414l1.414 1.414a1 1 0 0 1 0 1.414m2.828-2.828a1 1 0 0 1-1.414-1.414l-1.414 1.414a1 1 0 1 1-1.414-1.414l1.414-1.414a1 1 0 1 1 1.414 1.414l-1.414 1.414a1 1 0 0 1 1.414 1.414l-3.535-3.535a1 1 0 0 1 1.414-1.414zM4.5 0A3.5 3.5 0 0 1 8 3.5v1.096a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V3.5A3.5 3.5 0 0 1 4.5 0"/></svg></button>
-                            </td>
-                        </tr>
-                    `).join('');
-                } catch (error) {
-                    tableBody.innerHTML = `<tr><td colspan="7" class="text-center text-danger">Failed to load users: ${error.detail || error.message}</td></tr>`;
-                }
-            };
-            const handleShowCreateModal = () => {
-                document.getElementById('create-user-form').reset();
-                const expirationInput = document.getElementById('create-expiration');
-                const today = new Date();
-                const oneYearFromNow = new Date();
-                oneYearFromNow.setFullYear(today.getFullYear() + 1);
-                expirationInput.min = toISODateString(today);
-                expirationInput.max = toISODateString(oneYearFromNow);
-                expirationInput.value = toISODateString(oneYearFromNow);
-                const groupsContainer = document.getElementById('create-optional-groups-container');
-                const adminContainer = document.getElementById('create-admin-container');
-                if (currentUser.isHighPrivilege) {
-                    adminContainer.style.display = 'block';
-                    const groupsList = document.getElementById('create-optional-groups-list');
-                    if (config.optionalGroupsForHighPrivilege && config.optionalGroupsForHighPrivilege.length > 0) {
-                        groupsContainer.style.display = 'block';
-                        groupsList.innerHTML = config.optionalGroupsForHighPrivilege.map(g => `<div class="form-check"><input class="form-check-input" type="checkbox" value="${g}" id="create-group-${g}"><label class="form-check-label" for="create-group-${g}">${g}</label></div>`).join('');
-                    } else {
-                        groupsContainer.style.display = 'none';
-                    }
-                } else {
-                    groupsContainer.style.display = 'none';
-                    adminContainer.style.display = 'none';
-                }
-            };
-            const handleShowEditModal = async (sam, domain) => {
-                document.getElementById('edit-user-form').reset();
-                try {
-                    const userDetails = await apiFetch(`${API_BASE_URL}/users/details/${domain}/${sam}`);
-                    document.getElementById('edit-displayname').value = userDetails.displayName;
-                    document.getElementById('edit-samaccountname').value = userDetails.samAccountName;
-                    document.getElementById('edit-domain').value = domain;
-                    const expirationInput = document.getElementById('edit-expiration');
-                    const today = new Date();
-                    const oneYearFromNow = new Date();
-                    oneYearFromNow.setFullYear(today.getFullYear() + 1);
-                    expirationInput.min = toISODateString(today);
-                    expirationInput.max = toISODateString(oneYearFromNow);
-                    expirationInput.value = formatDateForInput(userDetails.accountExpirationDate) || toISODateString(oneYearFromNow);
-                    const groupsContainer = document.getElementById('edit-optional-groups-container');
-                    const adminContainer = document.getElementById('edit-admin-container');
-                    if (currentUser.isHighPrivilege) {
-                        adminContainer.style.display = 'block';
-                        document.getElementById('edit-admin-account').checked = userDetails.hasAdminAccount;
-                        const groupsList = document.getElementById('edit-optional-groups-list');
-                        if (config.optionalGroupsForHighPrivilege && config.optionalGroupsForHighPrivilege.length > 0) {
-                            groupsContainer.style.display = 'block';
-                            groupsList.innerHTML = config.optionalGroupsForHighPrivilege.map(g => `<div class="form-check"><input class="form-check-input" type="checkbox" value="${g}" id="edit-group-${g}" ${userDetails.memberOf.includes(g) ? 'checked' : ''}><label class="form-check-label" for="edit-group-${g}">${g}</label></div>`).join('');
-                        } else {
-                            groupsContainer.style.display = 'none';
-                        }
-                    } else {
-                        groupsContainer.style.display = 'none';
-                        adminContainer.style.display = 'none';
-                    }
-                    editUserModal.show();
-                } catch (error) {
-                    showAlert(`Failed to load user details: ${error.detail || error.message}`);
-                }
-            };
-            const handleResetPassword = async (sam, domain) => {
-                if (!confirm(`Are you sure you want to reset the password for ${sam}? A new random password will be generated.`)) return;
-                try {
-                    const result = await apiFetch(`${API_BASE_URL}/users/reset-password`, { method: 'POST', body: { domain, samAccountName: sam } });
-                    document.getElementById('reset-pw-result-username').textContent = result.samAccountName;
-                    document.getElementById('reset-pw-result-new').value = result.newPassword;
-                    resetPasswordResultModal.show();
-                } catch (error) {
-                    showAlert(`Failed to reset password: ${error.detail || error.message}`);
-                }
-            };
-            const handleUnlock = async (sam, domain) => {
-                 if (!confirm(`Are you sure you want to unlock the account for ${sam}?`)) return;
-                try {
-                    await apiFetch(`${API_BASE_URL}/users/unlock`, { method: 'POST', body: { domain, samAccountName: sam } });
-                    showAlert(`Successfully unlocked account: ${sam}`, 'success');
-                    handleSearch();
-                } catch (error) {
-                    showAlert(`Failed to unlock account: ${error.detail || error.message}`);
-                }
-            };
-            const handleDisable = async (sam, domain) => {
-                if (!confirm(`Are you sure you want to DISABLE the account for ${sam}? This action cannot be undone through this portal.`)) return;
-                try {
-                    await apiFetch(`${API_BASE_URL}/users/disable`, { method: 'POST', body: { domain, samAccountName: sam } });
-                    showAlert(`Successfully disabled account: ${sam}`, 'success');
-                    handleSearch();
-                } catch (error) {
-                    showAlert(`Failed to disable account: ${error.detail || error.message}`);
-                }
-            };
-            const handleCreateSubmit = async (e) => {
-                e.preventDefault();
-                const form = e.target;
-                if (!form.checkValidity()) { 
-                    form.classList.add('was-validated');
-                    e.stopPropagation(); 
-                    return; 
-                }
-                const expirationDate = form.querySelector('#create-expiration').value;
-                const optionalGroups = Array.from(form.querySelectorAll('#create-optional-groups-list input:checked')).map(cb => cb.value);
-                const data = {
-                    domain: form.querySelector('#create-domain').value,
-                    firstName: form.querySelector('#create-firstname').value,
-                    lastName: form.querySelector('#create-lastname').value,
-                    samAccountName: form.querySelector('#create-samaccountname').value,
-                    optionalGroups: optionalGroups,
-                    createAdminAccount: form.querySelector('#create-admin-account').checked,
-                    accountExpirationDate: expirationDate
-                };
-                try {
-                    const result = await apiFetch(`${API_BASE_URL}/users/create`, { method: 'POST', body: data });
-                    createUserModal.hide();
-                    const resultBody = document.getElementById('create-user-result-body');
-                    let resultHtml = `<h6>${result.message}</h6>`;
-                    if (result.userAccount) {
-                        resultHtml += `<h5 class="mt-4">User Account Details</h5><table class="table table-sm result-table"><tr><td><strong>Username:</strong></td><td>${result.userAccount.samAccountName}</td></tr><tr><td><strong>Display Name:</strong></td><td>${result.userAccount.displayName}</td></tr><tr><td><strong>Temporary Password:</strong></td><td><code>${result.userAccount.initialPassword}</code></td></tr></table>`;
-                    }
-                    if (result.adminAccount) {
-                        resultHtml += `<h5 class="mt-4">Admin Account Details</h5><table class="table table-sm result-table"><tr><td><strong>Username:</strong></td><td>${result.adminAccount.samAccountName}</td></tr><tr><td><strong>Display Name:</strong></td><td>${result.adminAccount.displayName}</td></tr><tr><td><strong>Temporary Password:</strong></td><td><code>${result.adminAccount.initialPassword}</code></td></tr></table>`;
-                    }
-                    if(result.groupsAssociated && result.groupsAssociated.length > 0){
-                        resultHtml += `<h5 class="mt-4">Associated Groups</h5><p>${result.groupsAssociated.join(', ')}</p>`;
-                    }
-                    resultBody.innerHTML = resultHtml;
-                    createUserResultModal.show();
-                    handleSearch();
-                } catch (error) {
-                    const validationErrors = error.errors ? Object.values(error.errors).flat().join(' ') : '';
-                    showAlert(`Failed to create user: ${error.detail || error.message} ${validationErrors}`);
-                }
-            };
-            const handleEditSubmit = async (e) => {
-                e.preventDefault();
-                const form = e.target;
-                 if (!form.checkValidity()) { 
-                    form.classList.add('was-validated');
-                    e.stopPropagation(); 
-                    return; 
-                }
-                const expirationDate = form.querySelector('#edit-expiration').value;
-                const optionalGroups = Array.from(form.querySelectorAll('#edit-optional-groups-list input:checked')).map(cb => cb.value);
-                const data = {
-                    domain: form.querySelector('#edit-domain').value,
-                    samAccountName: form.querySelector('#edit-samaccountname').value,
-                    optionalGroups: optionalGroups,
-                    manageAdminAccount: form.querySelector('#edit-admin-account').checked,
-                    accountExpirationDate: expirationDate
-                };
-                try {
-                    await apiFetch(`${API_BASE_URL}/users/update`, { method: 'PUT', body: data });
-                    editUserModal.hide();
-                    showAlert(`Successfully updated user: ${data.samAccountName}`, 'success');
-                    handleSearch();
-                } catch (error) {
-                    const validationErrors = error.errors ? Object.values(error.errors).flat().join(' ') : '';
-                    showAlert(`Failed to update user: ${error.detail || error.message} ${validationErrors}`);
-                }
-            };
-            document.getElementById('login-btn').addEventListener('click', initializeApp);
-            document.getElementById('logout-btn').addEventListener('click', () => showScreen('login'));
-            document.getElementById('try-again-btn').addEventListener('click', () => showScreen('login'));
-            document.getElementById('search-users-btn').addEventListener('click', handleSearch);
-            document.getElementById('create-user-show-modal-btn').addEventListener('click', () => { handleShowCreateModal(); createUserModal.show(); });
-            document.getElementById('create-user-form').addEventListener('submit', handleCreateSubmit);
-            document.getElementById('edit-user-form').addEventListener('submit', handleEditSubmit);
-            document.getElementById('user-table-body').addEventListener('click', (e) => {
-                const button = e.target.closest('button[data-action]');
-                if (!button) return;
-                const sam = button.dataset.sam;
-                const domain = document.getElementById('domain-select').value;
-                switch(button.dataset.action) {
-                    case 'edit': handleShowEditModal(sam, domain); break;
-                    case 'reset-pw': handleResetPassword(sam, domain); break;
-                    case 'unlock': handleUnlock(sam, domain); break;
-                    case 'disable': handleDisable(sam, domain); break;
-                }
-            });
-            document.getElementById('copy-password-btn').addEventListener('click', () => {
-                const passwordInput = document.getElementById('reset-pw-result-new');
-                passwordInput.select();
-                document.execCommand('copy');
-                showAlert('Password copied to clipboard!', 'success');
-            });
-            createUserModal = new bootstrap.Modal(document.getElementById('create-user-modal'));
-            editUserModal = new bootstrap.Modal(document.getElementById('edit-user-modal'));
-            resetPasswordResultModal = new bootstrap.Modal(document.getElementById('reset-password-result-modal'));
-            createUserResultModal = new bootstrap.Modal(document.getElementById('create-user-result-modal'));
-            showScreen('login');
-        });
-    </script>
+    
+    <!-- Link to Bootstrap JS from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <!-- Link to your custom application script -->
+    <script src="js/app.js"></script>
 </body>
 </html>
 
