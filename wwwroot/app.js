@@ -60,13 +60,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 mergedOptions.body = JSON.stringify(mergedOptions.body);
             }
             const response = await fetch(url, mergedOptions);
+            
+            // CORRECTED ERROR HANDLING: Read the body only once.
             if (!response.ok) {
+                const errorBody = await response.text(); // Read the raw body ONCE.
                 let errorData;
-                try { errorData = await response.json(); }
-                catch (e) { errorData = { message: `HTTP error! status: ${response.status}`, detail: await response.text() || 'Server returned an unexpected response.' }; }
+                try {
+                    errorData = JSON.parse(errorBody); // Try to parse it as JSON.
+                } catch (e) {
+                    // If parsing fails, it's not JSON. Create a generic error.
+                    errorData = { 
+                        message: `HTTP error! status: ${response.status}`, 
+                        detail: errorBody || 'Server returned an unexpected response.' 
+                    };
+                }
                 if (response.status === 401) errorData.detail = "Authentication failed. Check browser settings for Integrated Windows Authentication.";
                 throw errorData;
             }
+
             if (response.status === 204) return null;
             return response.json();
         } finally {
@@ -360,4 +371,3 @@ document.addEventListener('DOMContentLoaded', () => {
     createUserResultModal = new bootstrap.Modal(document.getElementById('create-user-result-modal'));
     showScreen('login');
 });
-
