@@ -116,6 +116,10 @@ document.addEventListener('DOMContentLoaded', () => {
             
             console.log("Initialization complete. Showing main screen.");
             showScreen('main');
+
+            // Automatically perform an initial search for users.
+            await handleSearch();
+
         } catch (error) {
             console.error("Initialization failed:", error);
             document.getElementById('error-title').textContent = 'Access Denied';
@@ -350,7 +354,4 @@ document.addEventListener('DOMContentLoaded', () => {
             resetPasswordResultModal = new bootstrap.Modal(document.getElementById('reset-password-result-modal'));
             createUserResultModal = new bootstrap.Modal(document.getElementById('create-user-result-modal'));
             showScreen('login');
-        });
-    </script>
-</body>
-</html>
+);
