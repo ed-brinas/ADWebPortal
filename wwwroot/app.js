@@ -85,16 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // --- Core Application Logic ---
-    const checkApiHealth = async () => {
-        try {
-            await fetch(`${API_BASE_URL}/healthcheck`);
-            return true;
-        } catch (error) {
-            return false;
-        }
-    };
-
     const setupMainApplication = async () => {
+        // This function runs AFTER a successful login to populate the UI.
         document.getElementById('user-name').textContent = currentUser.name;
         const domainSelect = document.getElementById('domain-select');
         const createDomainSelect = document.getElementById('create-domain');
@@ -107,17 +99,22 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('create-user-show-modal-btn').disabled = !currentUser.isHighPrivilege;
         
         showScreen('main');
-        await handleSearch();
+        await handleSearch(); // Automatically load the user list
     };
     
     const tryAutoLogin = async () => {
         console.log("Attempting automatic login on page load...");
         try {
+            // Silently try to fetch user context. A 401 will throw an error.
             currentUser = await apiFetch(`${API_BASE_URL}/auth/me`);
             config = await apiFetch(`${API_BASE_URL}/config/settings`);
+            
             console.log("Automatic login successful.");
             await setupMainApplication();
+
         } catch (error) {
+            // This is expected if the user isn't logged in or the session has expired.
+            // We gracefully show the login page without an error.
             console.log("Automatic login failed (user not logged in). Showing login page.");
             showScreen('login');
         }
@@ -133,11 +130,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             
+            // Attempt to fetch the user context. This serves as our login check.
             currentUser = await apiFetch(`${API_BASE_URL}/auth/me`);
             config = await apiFetch(`${API_BASE_URL}/config/settings`);
+            
             console.log("Manual login successful.");
             await setupMainApplication();
+
         } catch (error) {
+            // A failure here is a real error because the user initiated it.
             console.error("Manual login failed:", error);
             document.getElementById('error-title').textContent = 'Access Denied';
             document.getElementById('error-details').textContent = error.detail || error.message || 'You are not authorized to access this portal.';
@@ -387,11 +388,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    document.getElementById('create-user-form').addEventListener('submit', handleCreateSubmit);
+    document.getElementById('edit-user-form').addEventListener('submit', handleEditSubmit);
+
     createUserModal = new bootstrap.Modal(document.getElementById('create-user-modal'));
     editUserModal = new bootstrap.Modal(document.getElementById('edit-user-modal'));
     resetPasswordResultModal = new bootstrap.Modal(document.getElementById('reset-password-result-modal'));
     createUserResultModal = new bootstrap.Modal(document.getElementById('create-user-result-modal'));
 
-    tryAutoLogin();
+    tryAutoLogin(); // Initial automatic login attempt on page load
 });
-
