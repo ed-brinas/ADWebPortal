@@ -391,4 +391,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
     tryAutoLogin();
 });
-
