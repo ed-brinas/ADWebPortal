@@ -215,3 +215,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initializeApp(); // Initial automatic login attempt on page load
 });
+
