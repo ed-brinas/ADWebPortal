@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showLoading(true);
         try {
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 15000); // 15-second timeout
+            const timeoutId = setTimeout(() => controller.abort(), 15000);
 
             const mergedOptions = { 
                 ...options, 
@@ -86,7 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Core Application Logic ---
     const setupMainApplication = async () => {
-        // This function runs AFTER a successful login to populate the UI.
         document.getElementById('user-name').textContent = currentUser.name;
         const domainSelect = document.getElementById('domain-select');
         const createDomainSelect = document.getElementById('create-domain');
@@ -99,29 +98,20 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('create-user-show-modal-btn').disabled = !currentUser.isHighPrivilege;
         
         showScreen('main');
-        await handleSearch(); // Automatically load the user list
+        await handleSearch();
     };
     
     const tryAutoLogin = async () => {
-        console.log("Attempting automatic login on page load...");
         try {
-            // Silently try to fetch user context. A 401 will throw an error.
             currentUser = await apiFetch(`${API_BASE_URL}/auth/me`);
             config = await apiFetch(`${API_BASE_URL}/config/settings`);
-            
-            console.log("Automatic login successful.");
             await setupMainApplication();
-
         } catch (error) {
-            // This is expected if the user isn't logged in or the session has expired.
-            // We gracefully show the login page without an error.
-            console.log("Automatic login failed (user not logged in). Showing login page.");
             showScreen('login');
         }
     };
 
     const handleLoginClick = async () => {
-        console.log("Login button clicked. Attempting to log in...");
         try {
             if (!await checkApiHealth()) {
                 document.getElementById('error-title').textContent = 'Connection Error';
@@ -130,16 +120,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             
-            // Attempt to fetch the user context. This serves as our login check.
             currentUser = await apiFetch(`${API_BASE_URL}/auth/me`);
             config = await apiFetch(`${API_BASE_URL}/config/settings`);
-            
-            console.log("Manual login successful.");
             await setupMainApplication();
-
         } catch (error) {
-            // A failure here is a real error because the user initiated it.
-            console.error("Manual login failed:", error);
             document.getElementById('error-title').textContent = 'Access Denied';
             document.getElementById('error-details').textContent = error.detail || error.message || 'You are not authorized to access this portal.';
             showScreen('error');
@@ -189,7 +173,6 @@ document.addEventListener('DOMContentLoaded', () => {
             
             tableBody.innerHTML = tableHtml;
         } catch (error) {
-            console.error("Failed to search for users:", error);
             tableBody.innerHTML = `<tr><td colspan="7" class="text-center text-danger">Failed to load users: ${error.detail || error.message}</td></tr>`;
         }
     };
@@ -224,7 +207,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('edit-user-form').reset();
         try {
             const userDetails = await apiFetch(`${API_BASE_URL}/users/details/${domain}/${sam}`);
-            document.getElementById('edit-displayname').value = userDetails.displayName;
+            document.getElementById('edit-firstname').value = userDetails.firstName || '';
+            document.getElementById('edit-lastname').value = userDetails.lastName || '';
             document.getElementById('edit-samaccountname').value = userDetails.samAccountName;
             document.getElementById('edit-domain').value = domain;
             const expirationInput = document.getElementById('edit-expiration');
@@ -356,6 +340,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = {
             domain: form.querySelector('#edit-domain').value,
             samAccountName: form.querySelector('#edit-samaccountname').value,
+            firstName: form.querySelector('#edit-firstname').value,
+            lastName: form.querySelector('#edit-lastname').value,
             optionalGroups: optionalGroups,
             manageAdminAccount: form.querySelector('#edit-admin-account').checked,
             accountExpirationDate: expirationDate
@@ -396,5 +382,6 @@ document.addEventListener('DOMContentLoaded', () => {
     resetPasswordResultModal = new bootstrap.Modal(document.getElementById('reset-password-result-modal'));
     createUserResultModal = new bootstrap.Modal(document.getElementById('create-user-result-modal'));
 
-    tryAutoLogin(); // Initial automatic login attempt on page load
+    tryAutoLogin();
 });
+
