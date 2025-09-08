@@ -363,4 +363,3 @@ document.addEventListener('DOMContentLoaded', () => {
     // Attempt to log in automatically on page load
     tryLoginAndInitialize();
 });
-
