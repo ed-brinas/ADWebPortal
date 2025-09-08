@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showLoading(true);
         try {
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 15000);
+            const timeoutId = setTimeout(() => controller.abort(), 15000); // 15-second timeout
 
             const mergedOptions = { 
                 ...options, 
@@ -207,10 +207,12 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('edit-user-form').reset();
         try {
             const userDetails = await apiFetch(`${API_BASE_URL}/users/details/${domain}/${sam}`);
+            document.getElementById('edit-username-display').value = userDetails.samAccountName;
+            document.getElementById('edit-samaccountname').value = userDetails.samAccountName;
             document.getElementById('edit-firstname').value = userDetails.firstName || '';
             document.getElementById('edit-lastname').value = userDetails.lastName || '';
-            document.getElementById('edit-samaccountname').value = userDetails.samAccountName;
             document.getElementById('edit-domain').value = domain;
+
             const expirationInput = document.getElementById('edit-expiration');
             const today = new Date();
             const oneYearFromNow = new Date();
@@ -218,6 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
             expirationInput.min = toISODateString(today);
             expirationInput.max = toISODateString(oneYearFromNow);
             expirationInput.value = formatDateForInput(userDetails.accountExpirationDate) || toISODateString(oneYearFromNow);
+            
             const groupsContainer = document.getElementById('edit-optional-groups-container');
             const adminContainer = document.getElementById('edit-admin-container');
             if (currentUser.isHighPrivilege) {
@@ -382,6 +385,6 @@ document.addEventListener('DOMContentLoaded', () => {
     resetPasswordResultModal = new bootstrap.Modal(document.getElementById('reset-password-result-modal'));
     createUserResultModal = new bootstrap.Modal(document.getElementById('create-user-result-modal'));
 
-    tryAutoLogin();
+    tryAutoLogin(); // Initial automatic login attempt on page load
 });
 
