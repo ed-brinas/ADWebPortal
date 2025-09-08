@@ -160,12 +160,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td>${user.hasAdminAccount ? '✔️' : ''}</td>
                     <td>${formatDisplayDate(user.accountExpirationDate)}</td>
                     <td class="action-btn-group">
-                        <button class="btn btn-sm btn-secondary" data-action="edit" data-sam="${user.samAccountName}">Edit</button>
-                        <button class="btn btn-sm btn-warning" data-action="reset-pw" data-sam="${user.samAccountName}">Reset PW</button>
-                        <button class="btn btn-sm btn-info" data-action="unlock" data-sam="${user.samAccountName}">Unlock</button>
+                        <button class="btn btn-sm btn-secondary" title="Edit User" data-action="edit" data-sam="${user.samAccountName}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/></svg></button>
+                        <button class="btn btn-sm btn-warning" title="Reset Password" data-action="reset-pw" data-sam="${user.samAccountName}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-key-fill" viewBox="0 0 16 16"><path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2zM2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/></svg></button>
+                        <button class="btn btn-sm btn-info" title="Unlock Account" data-action="unlock" data-sam="${user.samAccountName}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-unlock-fill" viewBox="0 0 16 16"><path d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2"/></svg></button>
                         ${user.enabled
-                            ? `<button class="btn btn-sm btn-danger" data-action="disable" data-sam="${user.samAccountName}">Disable</button>`
-                            : `<button class="btn btn-sm btn-success" data-action="enable" data-sam="${user.samAccountName}">Enable</button>`
+                            ? `<button class="btn btn-sm btn-danger" title="Disable Account" data-action="disable" data-sam="${user.samAccountName}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-slash" viewBox="0 0 16 16"><path d="M13.879 10.414a2.502 2.502 0 0 0-3.465-3.465l3.465 3.465Zm.707.707-3.465-3.465a2.502 2.502 0 0 0-3.465 3.465l3.465-3.465Zm-4.56-4.56a2.5 2.5 0 1 0 0-3.535 2.5 2.5 0 0 0 0 3.535M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0m-2.293 7.293a1 1 0 0 1-1.414 0l-1.414-1.414a1 1 0 1 1 1.414-1.414l1.414 1.414a1 1 0 0 1 0 1.414m2.828-2.828a1 1 0 0 1-1.414-1.414l-1.414 1.414a1 1 0 1 1-1.414-1.414l1.414-1.414a1 1 0 1 1 1.414 1.414l-1.414 1.414a1 1 0 0 1 1.414 1.414l-3.535-3.535a1 1 0 0 1 1.414-1.414zM4.5 0A3.5 3.5 0 0 1 8 3.5v1.096a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V3.5A3.5 3.5 0 0 1 4.5 0"/></svg></button>`
+                            : `<button class="btn btn-sm btn-success" title="Enable Account" data-action="enable" data-sam="${user.samAccountName}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill-check" viewBox="0 0 16 16"><path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m-.646-4.854.646.647.646-.647a.5.5 0 0 1 .708.708l-1 1a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708z"/><path d="M5.5 2.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0m.5 8.5a.5.5 0 0 1 .5.5v1.5a.5.5 0 0 1-1 0V12a.5.5 0 0 1 .5-.5m-2-1a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5m1.5 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5"/></svg></button>`
                         }
                     </td>
                 </tr>
@@ -207,11 +207,9 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('edit-user-form').reset();
         try {
             const userDetails = await apiFetch(`${API_BASE_URL}/users/details/${domain}/${sam}`);
-
-            // FIX: Add a check to ensure userDetails is not null before proceeding.
             if (!userDetails) {
                 showAlert(`Could not find details for user '${sam}'. The user may have been deleted or is outside the configured search scope.`, 'warning');
-                return; // Stop execution to prevent errors.
+                return;
             }
 
             document.getElementById('edit-username-display').value = userDetails.samAccountName;
@@ -219,7 +217,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('edit-firstname').value = userDetails.firstName || '';
             document.getElementById('edit-lastname').value = userDetails.lastName || '';
             document.getElementById('edit-domain').value = domain;
-
             const expirationInput = document.getElementById('edit-expiration');
             const today = new Date();
             const oneYearFromNow = new Date();
@@ -394,3 +391,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     tryAutoLogin();
 });
+
