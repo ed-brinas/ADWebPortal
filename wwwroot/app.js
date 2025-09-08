@@ -60,24 +60,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 mergedOptions.body = JSON.stringify(mergedOptions.body);
             }
             const response = await fetch(url, mergedOptions);
-            
-            // CORRECTED ERROR HANDLING: Read the body only once.
             if (!response.ok) {
-                const errorBody = await response.text(); // Read the raw body ONCE.
                 let errorData;
-                try {
-                    errorData = JSON.parse(errorBody); // Try to parse it as JSON.
-                } catch (e) {
-                    // If parsing fails, it's not JSON. Create a generic error.
-                    errorData = { 
-                        message: `HTTP error! status: ${response.status}`, 
-                        detail: errorBody || 'Server returned an unexpected response.' 
-                    };
-                }
+                try { errorData = await response.json(); }
+                catch (e) { errorData = { message: `HTTP error! status: ${response.status}`, detail: await response.text() || 'Server returned an unexpected response.' }; }
                 if (response.status === 401) errorData.detail = "Authentication failed. Check browser settings for Integrated Windows Authentication.";
                 throw errorData;
             }
-
             if (response.status === 204) return null;
             return response.json();
         } finally {
@@ -95,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    const initializeApp = async () => {
+    const tryLoginAndInitialize = async () => {
         if (!await checkApiHealth()) {
             document.getElementById('error-title').textContent = 'Connection Error';
             document.getElementById('error-details').textContent = "API Service is not available. Please contact your Administrator.";
@@ -123,10 +112,9 @@ document.addEventListener('DOMContentLoaded', () => {
             await handleSearch();
 
         } catch (error) {
-            console.error("Initialization failed:", error);
-            document.getElementById('error-title').textContent = 'Access Denied';
-            document.getElementById('error-details').textContent = error.detail || error.message || 'You are not authorized to access this portal.';
-            showScreen('error');
+            // If any error occurs (e.g., 401 Unauthorized), show the login page.
+            console.error("Initialization failed, showing login page:", error);
+            showScreen('login');
         }
     };
 
@@ -339,7 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
             showAlert(`Failed to update user: ${error.detail || error.message} ${validationErrors}`);
         }
     };
-    document.getElementById('login-btn').addEventListener('click', initializeApp);
+    document.getElementById('login-btn').addEventListener('click', tryLoginAndInitialize);
     document.getElementById('logout-btn').addEventListener('click', () => showScreen('login'));
     document.getElementById('try-again-btn').addEventListener('click', () => showScreen('login'));
     document.getElementById('search-users-btn').addEventListener('click', handleSearch);
@@ -365,9 +353,14 @@ document.addEventListener('DOMContentLoaded', () => {
         document.execCommand('copy');
         showAlert('Password copied to clipboard!', 'success');
     });
+    
+    // Initialize Modals
     createUserModal = new bootstrap.Modal(document.getElementById('create-user-modal'));
     editUserModal = new bootstrap.Modal(document.getElementById('edit-user-modal'));
     resetPasswordResultModal = new bootstrap.Modal(document.getElementById('reset-password-result-modal'));
     createUserResultModal = new bootstrap.Modal(document.getElementById('create-user-result-modal'));
-    showScreen('login');
+
+    // Attempt to log in automatically on page load
+    tryLoginAndInitialize();
 });
+
