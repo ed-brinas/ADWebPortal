@@ -207,6 +207,13 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('edit-user-form').reset();
         try {
             const userDetails = await apiFetch(`${API_BASE_URL}/users/details/${domain}/${sam}`);
+
+            // FIX: Add a check to ensure userDetails is not null before proceeding.
+            if (!userDetails) {
+                showAlert(`Could not find details for user '${sam}'. The user may have been deleted or is outside the configured search scope.`, 'warning');
+                return; // Stop execution to prevent errors.
+            }
+
             document.getElementById('edit-username-display').value = userDetails.samAccountName;
             document.getElementById('edit-samaccountname').value = userDetails.samAccountName;
             document.getElementById('edit-firstname').value = userDetails.firstName || '';
@@ -385,6 +392,6 @@ document.addEventListener('DOMContentLoaded', () => {
     resetPasswordResultModal = new bootstrap.Modal(document.getElementById('reset-password-result-modal'));
     createUserResultModal = new bootstrap.Modal(document.getElementById('create-user-result-modal'));
 
-    tryAutoLogin(); // Initial automatic login attempt on page load
+    tryAutoLogin();
 });
 
