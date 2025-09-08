@@ -93,46 +93,58 @@ document.addEventListener('DOMContentLoaded', () => {
             return false;
         }
     };
+
+    const setupMainApplication = async () => {
+        document.getElementById('user-name').textContent = currentUser.name;
+        const domainSelect = document.getElementById('domain-select');
+        const createDomainSelect = document.getElementById('create-domain');
+        domainSelect.innerHTML = createDomainSelect.innerHTML = '';
+        config.domains.forEach(d => {
+            domainSelect.add(new Option(d, d));
+            createDomainSelect.add(new Option(d, d));
+        });
+        
+        document.getElementById('create-user-show-modal-btn').disabled = !currentUser.isHighPrivilege;
+        
+        showScreen('main');
+        await handleSearch();
+    };
     
-    const initializeApp = async () => {
-        console.log("Attempting to initialize application and log in...");
+    const tryAutoLogin = async () => {
+        console.log("Attempting automatic login on page load...");
         try {
-            // First, check if the API is even reachable.
+            currentUser = await apiFetch(`${API_BASE_URL}/auth/me`);
+            config = await apiFetch(`${API_BASE_URL}/config/settings`);
+            console.log("Automatic login successful.");
+            await setupMainApplication();
+        } catch (error) {
+            console.log("Automatic login failed (user not logged in). Showing login page.");
+            showScreen('login');
+        }
+    };
+
+    const handleLoginClick = async () => {
+        console.log("Login button clicked. Attempting to log in...");
+        try {
             if (!await checkApiHealth()) {
                 document.getElementById('error-title').textContent = 'Connection Error';
                 document.getElementById('error-details').textContent = "API Service is not available. Please contact your Administrator.";
                 showScreen('error');
                 return;
             }
-
-            // Attempt to fetch the user context. This serves as our login check.
+            
             currentUser = await apiFetch(`${API_BASE_URL}/auth/me`);
             config = await apiFetch(`${API_BASE_URL}/config/settings`);
-            
-            // If successful, populate the UI and show the main application
-            document.getElementById('user-name').textContent = currentUser.name;
-            const domainSelect = document.getElementById('domain-select');
-            const createDomainSelect = document.getElementById('create-domain');
-            domainSelect.innerHTML = createDomainSelect.innerHTML = '';
-            config.domains.forEach(d => {
-                domainSelect.add(new Option(d, d));
-                createDomainSelect.add(new Option(d, d));
-            });
-            
-            document.getElementById('create-user-show-modal-btn').disabled = !currentUser.isHighPrivilege;
-            
-            showScreen('main');
-            await handleSearch(); // Automatically load the user list
-
+            console.log("Manual login successful.");
+            await setupMainApplication();
         } catch (error) {
-            // If any part of the initialization fails (e.g., a 401 Unauthorized),
-            // it's not a critical application failure. It simply means the user is not logged in.
-            // So, we gracefully show the login page.
-            console.log("Initialization failed. This is expected if the user is not logged in. Showing login page.", error.message);
-            showScreen('login');
+            console.error("Manual login failed:", error);
+            document.getElementById('error-title').textContent = 'Access Denied';
+            document.getElementById('error-details').textContent = error.detail || error.message || 'You are not authorized to access this portal.';
+            showScreen('error');
         }
     };
-
+    
     const handleSearch = async () => {
         const domain = document.getElementById('domain-select').value;
         const nameFilter = document.getElementById('name-filter').value;
@@ -181,18 +193,185 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
     
-    // ... (Other handlers are unchanged but included for completeness)
-    const handleShowCreateModal = () => { /* ... */ };
-    const handleShowEditModal = async (sam, domain) => { /* ... */ };
-    const handleResetPassword = async (sam, domain) => { /* ... */ };
-    const handleUnlock = async (sam, domain) => { /* ... */ };
-    const handleDisable = async (sam, domain) => { /* ... */ };
-    const handleEnable = async (sam, domain) => { /* ... */ };
-    const handleCreateSubmit = async (e) => { /* ... */ };
-    const handleEditSubmit = async (e) => { /* ... */ };
+    const handleShowCreateModal = () => {
+        document.getElementById('create-user-form').reset();
+        const expirationInput = document.getElementById('create-expiration');
+        const today = new Date();
+        const oneYearFromNow = new Date();
+        oneYearFromNow.setFullYear(today.getFullYear() + 1);
+        expirationInput.min = toISODateString(today);
+        expirationInput.max = toISODateString(oneYearFromNow);
+        expirationInput.value = toISODateString(oneYearFromNow);
+        const groupsContainer = document.getElementById('create-optional-groups-container');
+        const adminContainer = document.getElementById('create-admin-container');
+        if (currentUser.isHighPrivilege) {
+            adminContainer.style.display = 'block';
+            const groupsList = document.getElementById('create-optional-groups-list');
+            if (config.optionalGroupsForHighPrivilege && config.optionalGroupsForHighPrivilege.length > 0) {
+                groupsContainer.style.display = 'block';
+                groupsList.innerHTML = config.optionalGroupsForHighPrivilege.map(g => `<div class="form-check"><input class="form-check-input" type="checkbox" value="${g}" id="create-group-${g}"><label class="form-check-label" for="create-group-${g}">${g}</label></div>`).join('');
+            } else {
+                groupsContainer.style.display = 'none';
+            }
+        } else {
+            groupsContainer.style.display = 'none';
+            adminContainer.style.display = 'none';
+        }
+    };
+
+    const handleShowEditModal = async (sam, domain) => {
+        document.getElementById('edit-user-form').reset();
+        try {
+            const userDetails = await apiFetch(`${API_BASE_URL}/users/details/${domain}/${sam}`);
+            document.getElementById('edit-displayname').value = userDetails.displayName;
+            document.getElementById('edit-samaccountname').value = userDetails.samAccountName;
+            document.getElementById('edit-domain').value = domain;
+            const expirationInput = document.getElementById('edit-expiration');
+            const today = new Date();
+            const oneYearFromNow = new Date();
+            oneYearFromNow.setFullYear(today.getFullYear() + 1);
+            expirationInput.min = toISODateString(today);
+            expirationInput.max = toISODateString(oneYearFromNow);
+            expirationInput.value = formatDateForInput(userDetails.accountExpirationDate) || toISODateString(oneYearFromNow);
+            const groupsContainer = document.getElementById('edit-optional-groups-container');
+            const adminContainer = document.getElementById('edit-admin-container');
+            if (currentUser.isHighPrivilege) {
+                adminContainer.style.display = 'block';
+                document.getElementById('edit-admin-account').checked = userDetails.hasAdminAccount;
+                const groupsList = document.getElementById('edit-optional-groups-list');
+                if (config.optionalGroupsForHighPrivilege && config.optionalGroupsForHighPrivilege.length > 0) {
+                    groupsContainer.style.display = 'block';
+                    groupsList.innerHTML = config.optionalGroupsForHighPrivilege.map(g => `<div class="form-check"><input class="form-check-input" type="checkbox" value="${g}" id="edit-group-${g}" ${userDetails.memberOf.includes(g) ? 'checked' : ''}><label class="form-check-label" for="edit-group-${g}">${g}</label></div>`).join('');
+                } else {
+                    groupsContainer.style.display = 'none';
+                }
+            } else {
+                groupsContainer.style.display = 'none';
+                adminContainer.style.display = 'none';
+            }
+            editUserModal.show();
+        } catch (error) {
+            showAlert(`Failed to load user details: ${error.detail || error.message}`);
+        }
+    };
+
+    const handleResetPassword = async (sam, domain) => {
+        if (!confirm(`Are you sure you want to reset the password for ${sam}? A new random password will be generated.`)) return;
+        try {
+            const result = await apiFetch(`${API_BASE_URL}/users/reset-password`, { method: 'POST', body: { domain, samAccountName: sam } });
+            document.getElementById('reset-pw-result-username').textContent = result.samAccountName;
+            document.getElementById('reset-pw-result-new').value = result.newPassword;
+            resetPasswordResultModal.show();
+        } catch (error) {
+            showAlert(`Failed to reset password: ${error.detail || error.message}`);
+        }
+    };
+
+    const handleUnlock = async (sam, domain) => {
+         if (!confirm(`Are you sure you want to unlock the account for ${sam}?`)) return;
+        try {
+            await apiFetch(`${API_BASE_URL}/users/unlock`, { method: 'POST', body: { domain, samAccountName: sam } });
+            showAlert(`Successfully unlocked account: ${sam}`, 'success');
+            handleSearch();
+        } catch (error) {
+            showAlert(`Failed to unlock account: ${error.detail || error.message}`);
+        }
+    };
+
+    const handleDisable = async (sam, domain) => {
+        if (!confirm(`Are you sure you want to DISABLE the account for ${sam}?`)) return;
+        try {
+            await apiFetch(`${API_BASE_URL}/users/disable`, { method: 'POST', body: { domain, samAccountName: sam } });
+            showAlert(`Successfully disabled account: ${sam}`, 'success');
+            handleSearch();
+        } catch (error) {
+            showAlert(`Failed to disable account: ${error.detail || error.message}`);
+        }
+    };
+
+    const handleEnable = async (sam, domain) => {
+        if (!confirm(`Are you sure you want to ENABLE the account for ${sam}?`)) return;
+        try {
+            await apiFetch(`${API_BASE_URL}/users/enable`, { method: 'POST', body: { domain, samAccountName: sam } });
+            showAlert(`Successfully enabled account: ${sam}`, 'success');
+            handleSearch();
+        } catch (error) {
+            showAlert(`Failed to enable account: ${error.detail || error.message}`);
+        }
+    };
+
+    const handleCreateSubmit = async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        if (!form.checkValidity()) { 
+            form.classList.add('was-validated');
+            e.stopPropagation(); 
+            return; 
+        }
+        const expirationDate = form.querySelector('#create-expiration').value;
+        const optionalGroups = Array.from(form.querySelectorAll('#create-optional-groups-list input:checked')).map(cb => cb.value);
+        const data = {
+            domain: form.querySelector('#create-domain').value,
+            firstName: form.querySelector('#create-firstname').value,
+            lastName: form.querySelector('#create-lastname').value,
+            samAccountName: form.querySelector('#create-samaccountname').value,
+            optionalGroups: optionalGroups,
+            createAdminAccount: form.querySelector('#create-admin-account').checked,
+            accountExpirationDate: expirationDate
+        };
+        try {
+            const result = await apiFetch(`${API_BASE_URL}/users/create`, { method: 'POST', body: data });
+            createUserModal.hide();
+            const resultBody = document.getElementById('create-user-result-body');
+            let resultHtml = `<h6>${result.message}</h6>`;
+            if (result.userAccount) {
+                resultHtml += `<h5 class="mt-4">User Account Details</h5><table class="table table-sm result-table"><tr><td><strong>Username:</strong></td><td>${result.userAccount.samAccountName}</td></tr><tr><td><strong>Display Name:</strong></td><td>${result.userAccount.displayName}</td></tr><tr><td><strong>Temporary Password:</strong></td><td><code>${result.userAccount.initialPassword}</code></td></tr></table>`;
+            }
+            if (result.adminAccount) {
+                resultHtml += `<h5 class="mt-4">Admin Account Details</h5><table class="table table-sm result-table"><tr><td><strong>Username:</strong></td><td>${result.adminAccount.samAccountName}</td></tr><tr><td><strong>Display Name:</strong></td><td>${result.adminAccount.displayName}</td></tr><tr><td><strong>Temporary Password:</strong></td><td><code>${result.adminAccount.initialPassword}</code></td></tr></table>`;
+            }
+            if(result.groupsAssociated && result.groupsAssociated.length > 0){
+                resultHtml += `<h5 class="mt-4">Associated Groups</h5><p>${result.groupsAssociated.join(', ')}</p>`;
+            }
+            resultBody.innerHTML = resultHtml;
+            createUserResultModal.show();
+            handleSearch();
+        } catch (error) {
+            const validationErrors = error.errors ? Object.values(error.errors).flat().join(' ') : '';
+            showAlert(`Failed to create user: ${error.detail || error.message} ${validationErrors}`);
+        }
+    };
+    
+    const handleEditSubmit = async (e) => {
+        e.preventDefault();
+        const form = e.target;
+         if (!form.checkValidity()) { 
+            form.classList.add('was-validated');
+            e.stopPropagation(); 
+            return; 
+        }
+        const expirationDate = form.querySelector('#edit-expiration').value;
+        const optionalGroups = Array.from(form.querySelectorAll('#edit-optional-groups-list input:checked')).map(cb => cb.value);
+        const data = {
+            domain: form.querySelector('#edit-domain').value,
+            samAccountName: form.querySelector('#edit-samaccountname').value,
+            optionalGroups: optionalGroups,
+            manageAdminAccount: form.querySelector('#edit-admin-account').checked,
+            accountExpirationDate: expirationDate
+        };
+        try {
+            await apiFetch(`${API_BASE_URL}/users/update`, { method: 'PUT', body: data });
+            editUserModal.hide();
+            showAlert(`Successfully updated user: ${data.samAccountName}`, 'success');
+            handleSearch();
+        } catch (error) {
+            const validationErrors = error.errors ? Object.values(error.errors).flat().join(' ') : '';
+            showAlert(`Failed to update user: ${error.detail || error.message} ${validationErrors}`);
+        }
+    };
 
     // --- Event Listeners and Initialization ---
-    document.getElementById('login-btn').addEventListener('click', initializeApp); // User-initiated login
+    document.getElementById('login-btn').addEventListener('click', handleLoginClick);
     document.getElementById('search-users-btn').addEventListener('click', handleSearch);
     document.getElementById('user-table-body').addEventListener('click', (e) => {
         const button = e.target.closest('button[data-action]');
@@ -213,6 +392,6 @@ document.addEventListener('DOMContentLoaded', () => {
     resetPasswordResultModal = new bootstrap.Modal(document.getElementById('reset-password-result-modal'));
     createUserResultModal = new bootstrap.Modal(document.getElementById('create-user-result-modal'));
 
-    initializeApp(); // Initial automatic login attempt on page load
+    tryAutoLogin();
 });
 
