@@ -126,6 +126,13 @@ document.addEventListener('DOMContentLoaded', () => {
             showScreen('error');
         }
     };
+
+    const handleLogoutClick = () => {
+        currentUser = null;
+        config = null;
+
+        showScreen('login');
+    };
     
     const handleSearch = async () => {
         const domain = document.getElementById('domain-select').value;
@@ -365,7 +372,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Event Listeners and Initialization ---
     document.getElementById('login-btn').addEventListener('click', handleLoginClick);
-    document.getElementById('logout-btn').addEventListener('click', () => showScreen('login'));
+    //document.getElementById('logout-btn').addEventListener('click', () => showScreen('login'));
+    document.getElementById('logout-btn').addEventListener('click', handleLogoutClick);
     document.getElementById('try-again-btn').addEventListener('click', () => showScreen('login'));
     document.getElementById('search-users-btn').addEventListener('click', handleSearch);
     document.getElementById('create-user-show-modal-btn').addEventListener('click', () => { handleShowCreateModal(); createUserModal.show(); });
