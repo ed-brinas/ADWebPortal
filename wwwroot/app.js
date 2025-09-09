@@ -269,6 +269,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    const handleResetAdminPassword = async (sam, domain) => {
+        if (!confirm(`Are you sure you want to reset the ADMIN password for the account associated with ${sam}? A new random password will be generated for the admin account.`)) return;
+        try {
+            const result = await apiFetch(`${API_BASE_URL}/users/reset-admin-password`, {
+                method: 'POST',
+                body: { domain, samAccountName: sam }
+            });
+            document.getElementById('reset-pw-result-username').textContent = result.samAccountName;
+            document.getElementById('reset-pw-result-new').value = result.newPassword;
+            resetPasswordResultModal.show();
+        } catch (error) {
+            showAlert(`Failed to reset admin password: ${error.detail || error.message}`);
+        }
+    };    
+
     const handleUnlock = async (sam, domain) => {
          if (!confirm(`Are you sure you want to unlock the account for ${sam}?`)) return;
         try {
