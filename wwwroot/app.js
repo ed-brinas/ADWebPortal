@@ -16,11 +16,13 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // --- UI Functions ---
     const showScreen = (screenName) => {
-        const mainApp = document.getElementById('main-app');
         Object.values(screens).forEach(s => s.style.display = 'none');
         if (screenName === 'main') {
-            mainApp.style.display = 'flex';
-        } else {
+            // FIX: Use 'block' to ensure the main layout stacks vertically.
+            // 'flex' was causing the nav, main, and footer to align in a row.
+            screens.main.style.display = 'block';
+        } else if (screens[screenName]) {
+            // 'flex' is appropriate for login/error screens to center content.
             screens[screenName].style.display = 'flex';
         }
     };
@@ -113,13 +115,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const handleLoginClick = async () => {
         try {
-            if (!await checkApiHealth()) {
-                document.getElementById('error-title').textContent = 'Connection Error';
-                document.getElementById('error-details').textContent = "API Service is not available. Please contact your Administrator.";
-                showScreen('error');
-                return;
-            }
-            
+            // FIX: Removed call to undefined function checkApiHealth().
+            // The subsequent apiFetch calls will handle API connection errors.
             currentUser = await apiFetch(`${API_BASE_URL}/auth/me`);
             config = await apiFetch(`${API_BASE_URL}/config/settings`);
             await setupMainApplication();
@@ -399,4 +396,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
     tryAutoLogin();
 });
-
