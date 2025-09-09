@@ -366,7 +366,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Event Listeners and Initialization ---
     document.getElementById('login-btn').addEventListener('click', handleLoginClick);
+    document.getElementById('logout-btn').addEventListener('click', () => showScreen('login'));
+    document.getElementById('try-again-btn').addEventListener('click', () => showScreen('login'));
     document.getElementById('search-users-btn').addEventListener('click', handleSearch);
+    document.getElementById('create-user-show-modal-btn').addEventListener('click', () => { handleShowCreateModal(); createUserModal.show(); });
+    document.getElementById('create-user-form').addEventListener('submit', handleCreateSubmit);
+    document.getElementById('edit-user-form').addEventListener('submit', handleEditSubmit);
     document.getElementById('user-table-body').addEventListener('click', (e) => {
         const button = e.target.closest('button[data-action]');
         if (!button) return;
@@ -380,9 +385,12 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'enable': handleEnable(sam, domain); break;
         }
     });
-
-    document.getElementById('create-user-form').addEventListener('submit', handleCreateSubmit);
-    document.getElementById('edit-user-form').addEventListener('submit', handleEditSubmit);
+    document.getElementById('copy-password-btn').addEventListener('click', () => {
+        const passwordInput = document.getElementById('reset-pw-result-new');
+        passwordInput.select();
+        document.execCommand('copy');
+        showAlert('Password copied to clipboard!', 'success');
+    });
 
     createUserModal = new bootstrap.Modal(document.getElementById('create-user-modal'));
     editUserModal = new bootstrap.Modal(document.getElementById('edit-user-modal'));
@@ -391,3 +399,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     tryAutoLogin();
 });
+
