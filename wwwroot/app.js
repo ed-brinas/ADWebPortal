@@ -211,8 +211,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             document.getElementById('edit-username-display').value = userDetails.samAccountName;
             document.getElementById('edit-samaccountname').value = userDetails.samAccountName;
-            document.getElementById('edit-firstname').value = userDetails.firstName || '';
-            document.getElementById('edit-lastname').value = userDetails.lastName || '';
+            // FIX: Changed userDetails.firstName to userDetails.givenName
+            document.getElementById('edit-firstname').value = userDetails.givenName || '';
+            // FIX: Changed userDetails.lastName to userDetails.sn
+            document.getElementById('edit-lastname').value = userDetails.sn || '';
             document.getElementById('edit-domain').value = domain;
             const expirationInput = document.getElementById('edit-expiration');
             const today = new Date();
